@@ -30,10 +30,7 @@ public class Mean {
             }
             double mean = sum/count;
             
-            System.out.println("Mean " + mean);
-        } catch (NumberFormatException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+            System.out.println("Mean: " + mean);
+        } 
     }
 }
