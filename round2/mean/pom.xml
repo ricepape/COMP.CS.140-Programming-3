@@ -20,7 +20,7 @@
         <executions>
           <execution>
             <configuration>
-              <mainClass>ExampleMain</mainClass>
+              <mainClass>com.mycompany.mean.Mean</mainClass>
               <onejarVersion>0.97</onejarVersion>
               <attachToBuild>true</attachToBuild>
             </configuration>
