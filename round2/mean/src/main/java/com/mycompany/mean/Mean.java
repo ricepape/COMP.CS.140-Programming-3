@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Mean {
 
     public static void main(String[] args) {
-        System.out.print("Enter numbers: ");
+        System.out.println("Enter numbers:");
         try (Scanner myScanner = new Scanner(System.in)) {
             String line = myScanner.nextLine();
             
@@ -30,7 +30,7 @@ public class Mean {
             }
             double mean = sum/count;
             
-            System.out.print("Mean: " + mean);
+            System.out.println("Mean: " + mean);
         } 
     }
 }
