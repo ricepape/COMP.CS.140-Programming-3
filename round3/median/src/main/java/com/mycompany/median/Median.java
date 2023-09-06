@@ -36,9 +36,9 @@ public class Median {
             Integer middle = median_string.size()/2;
 
             if ((median_string.size() % 2) == 0) {
-                median = median_string.get(middle)+median_string.get(middle+1);
+                median = (median_string.get(middle)+median_string.get(middle-1))/2;
             } else {
-                median = median_string.get(middle+1);
+                median = median_string.get(middle);
             }
             System.out.println("Median: " + median);
                 
