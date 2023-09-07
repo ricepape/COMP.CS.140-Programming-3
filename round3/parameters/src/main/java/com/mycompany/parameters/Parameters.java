@@ -19,9 +19,10 @@ public class Parameters {
     public static void main(String[] args) throws IOException {
 
         ArrayList<String> string = new ArrayList<>();
+        int width = 0;
         
-        try (var input = new BufferedReader(new FileReader("input.txt"))) {
-            int width = 0;
+        try (var input = new BufferedReader(new FileReader("./tpthvu/round3/parameters/src/main/java/com/mycompany/parameters/input.txt"))) {
+
             String line;
             while ((line = input.readLine()) != null) {
                 string.add(line);
@@ -32,12 +33,31 @@ public class Parameters {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        String amount = Integer.toString(string.size());
+
         Collections.sort(string);
-        System.out.format("#%2d|%{width}s#", "#", "#");
-        for (int i = 1; i <= string.size() ; i++) {
-            System.out.format("#%2d|%{width}s#", i, string.get(i-1));
-            System.out.format("#%2s+%{width}s#", "-", "-");
+        for (int i = 0; i < (width + amount.length() + 3); i++) {
+            System.out.print("#");
         }
-        System.out.format("#%2d|%{width}s#", "#", "#");
+        System.out.println();
+        for (int i = 0; i < string.size(); i++) {
+            System.out.format("#%2d|%-"+width+"s#\n", i + 1, string.get(i));
+            System.out.print("#");
+            if (i < string.size() - 1) {
+                for (int k = 0; k < amount.length(); k++){
+                    System.out.print("-");
+                }
+                System.out.print("+");
+                for (int j = 0; j < width; j++) {
+                    System.out.print("-");
+                }
+                System.out.print("#\n");
+            }
+        }
+        
+        for (int i = 0; i < (width + amount.length() + 3); i++) {
+            System.out.print("#");
+        }
+        System.out.println();
     }
 }
