@@ -2,8 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.parameters;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
