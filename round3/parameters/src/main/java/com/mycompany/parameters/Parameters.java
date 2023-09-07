@@ -21,7 +21,7 @@ public class Parameters {
         ArrayList<String> string = new ArrayList<>();
         int width = 0;
         
-        try (var input = new BufferedReader(new FileReader("input.txt"))) {
+        try (var input = new BufferedReader(new FileReader("round3/parameters/input.txt"))) {
 
             String line;
             while ((line = input.readLine()) != null) {
