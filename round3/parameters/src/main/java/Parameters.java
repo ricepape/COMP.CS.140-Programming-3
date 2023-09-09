@@ -10,7 +10,7 @@ public class Parameters {
         ArrayList<String> strings = new ArrayList<>();
         int width = 0;
 
-        System.out.println("Parameters: ");
+        System.out.println("Parameters:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // Read input until an empty line is entered
