@@ -1,63 +1,66 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/**
- *
- * @author vudinhthi2304
- */
 public class Parameters {
 
     public static void main(String[] args) throws IOException {
-
-        ArrayList<String> string = new ArrayList<>();
+        ArrayList<String> strings = new ArrayList<>();
         int width = 0;
 
-        File file = new File("input.txt");
-        String path = file.getAbsolutePath();
+        System.out.println("Parameters: ");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        try (BufferedReader input = new BufferedReader(new FileReader(path))) {
-
-            String line;
-            while ((line = input.readLine()) != null) {
-                if (line.isBlank()) break;
-                string.add(line);
-                if (width < line.length()) {
-                    width = line.length();
-                }
+        // Read input until an empty line is entered
+        while (true) {
+            String line = reader.readLine();
+            if (line.isEmpty()) {
+                break;
             }
-        } catch (IOException e) {
+            strings.add(line);
+            width = Math.max(width, line.length());
         }
-        String amount = Integer.toString(string.size());
 
-        Collections.sort(string);
-        System.out.println("Parameters:");
-        for (int i = 0; i < (width + amount.length() + 7); i++) {
+        Collections.sort(strings);
+
+        // Calculate the amount here, outside of the loop
+        int amount = strings.size();
+
+        // Print the header
+        printHeader(width, amount);
+
+        // Print the data
+        for (int i = 0; i < strings.size(); i++) {
+            System.out.format("# %"+Integer.toString(amount).length()+"d | %-" + width + "s #\n", i + 1, strings.get(i));
+            if (i < strings.size() - 1) {
+                printSeparator(width, amount);
+            }
+        }
+
+        // Print the footer
+        printHeader(width, amount);
+    }
+
+    // Helper method to print the header and footer
+    private static void printHeader(int width, int amount) {
+        for (int i = 0; i < (width + Integer.toString(amount).length() + 7); i++) {
             System.out.print("#");
         }
         System.out.println();
-        for (int i = 0; i < string.size(); i++) {
-            System.out.format("# %2d | %-" + width + "s #\n", i + 1, string.get(i));
-            if (i != string.size() - 1) {
-                System.out.print("#-");
-            }
-            if (i < string.size() - 1) {
-                for (int k = 0; k < amount.length(); k++) {
-                    System.out.print("-");
-                }
-                System.out.print("-+--");
-                for (int j = 0; j < width; j++) {
-                    System.out.print("-");
-                }
-                System.out.print("#\n");
-            }
+    }
+
+    // Helper method to print the separator between data entries
+    private static void printSeparator(int width, int amount) {
+        System.out.print("#-");
+        for (int k = 0; k < Integer.toString(amount).length(); k++) {
+            System.out.print("-");
         }
-        for (int i = 0; i < (width + amount.length() + 7); i++) {
-            System.out.print("#");
+        System.out.print("-+--");
+        for (int j = 0; j < width; j++) {
+            System.out.print("-");
         }
-        System.out.println();
+        System.out.print("#\n");
     }
 }
