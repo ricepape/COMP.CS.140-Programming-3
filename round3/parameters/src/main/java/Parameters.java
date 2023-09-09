@@ -3,7 +3,6 @@
  */
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,10 +19,7 @@ public class Parameters {
         ArrayList<String> string = new ArrayList<>();
         int width = 0;
 
-        File file = new File("input.txt");
-        String path = file.getAbsolutePath();
-        
-        try (var input = new BufferedReader(new FileReader(path))) {
+        try (var input = new BufferedReader(new FileReader("input.txt"))) {
 
             String line;
             while ((line = input.readLine()) != null) {
