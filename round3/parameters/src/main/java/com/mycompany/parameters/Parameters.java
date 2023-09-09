@@ -1,6 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
+package com.mycompany.parameters;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -19,7 +17,7 @@ public class Parameters {
         ArrayList<String> string = new ArrayList<>();
         int width = 0;
 
-        try (var input = new BufferedReader(new FileReader("input.txt"))) {
+        try (BufferedReader input = new BufferedReader(new FileReader("input.txt"))) {
 
             String line;
             while ((line = input.readLine()) != null) {
@@ -29,7 +27,6 @@ public class Parameters {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
         }
         String amount = Integer.toString(string.size());
 
@@ -40,12 +37,12 @@ public class Parameters {
         }
         System.out.println();
         for (int i = 0; i < string.size(); i++) {
-            System.out.format("# %2d | %-"+width+"s #\n", i + 1, string.get(i));
-            if (i != string.size()-1){   
+            System.out.format("# %2d | %-" + width + "s #\n", i + 1, string.get(i));
+            if (i != string.size() - 1) {
                 System.out.print("#-");
             }
             if (i < string.size() - 1) {
-                for (int k = 0; k < amount.length(); k++){
+                for (int k = 0; k < amount.length(); k++) {
                     System.out.print("-");
                 }
                 System.out.print("-+--");
