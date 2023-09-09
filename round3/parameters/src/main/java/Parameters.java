@@ -1,6 +1,5 @@
-package com.mycompany.parameters;
-
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,10 +16,14 @@ public class Parameters {
         ArrayList<String> string = new ArrayList<>();
         int width = 0;
 
-        try (BufferedReader input = new BufferedReader(new FileReader("input.txt"))) {
+        File file = new File("input.txt");
+        String path = file.getAbsolutePath();
+
+        try (BufferedReader input = new BufferedReader(new FileReader(path))) {
 
             String line;
             while ((line = input.readLine()) != null) {
+                if (line.isBlank()) break;
                 string.add(line);
                 if (width < line.length()) {
                     width = line.length();
