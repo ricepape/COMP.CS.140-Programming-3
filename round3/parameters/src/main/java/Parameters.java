@@ -34,6 +34,7 @@ public class Parameters {
         String amount = Integer.toString(string.size());
 
         Collections.sort(string);
+        System.out.println("Parameters:");
         for (int i = 0; i < (width + amount.length() + 7); i++) {
             System.out.print("#");
         }
