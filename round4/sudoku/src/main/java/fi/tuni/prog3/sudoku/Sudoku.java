@@ -42,7 +42,6 @@ public class Sudoku {
     }
 
     public static void print (){
-        System.out.println("Read the following sudoku:");
         for (int x = 0; x<37; x++){
             System.out.print("#");
         }
@@ -109,7 +108,7 @@ public class Sudoku {
                             for (int m = i; m < i + 3; m++) {
                                 for (int n = j; n < j + 3; n++) {
                                     if (grid[m][n] == grid[x][y] && (m != x || n != y)) {
-                                        System.out.println("Block at (" + (i - i % 3) + "," + (j - j % 3) +
+                                        System.out.println("Block at (" + (i - i % 3) + ", "+(j - j % 3) +
                                                     ") has multiple " + grid[x][y] + "'s!");
                                         return false;
                                     }
