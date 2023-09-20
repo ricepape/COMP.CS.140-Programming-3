@@ -20,7 +20,7 @@
         <executions>
           <execution>
             <configuration>
-              <mainClass>fi.tuni.prog3.sudoku</mainClass>
+              <mainClass>fi.tuni.prog3.sudoku.Sudoku</mainClass>
               <onejarVersion>0.97</onejarVersion>
               <attachToBuild>true</attachToBuild>
             </configuration>

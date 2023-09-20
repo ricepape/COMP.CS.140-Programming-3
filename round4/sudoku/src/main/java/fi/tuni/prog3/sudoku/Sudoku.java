@@ -36,7 +36,9 @@ public class Sudoku {
                     set(i / 9, i % 9, line.charAt(i));
                 }
                 print();
-                check();
+                if(check()){
+                    System.out.println("The sudoku is legal.");    
+                };
                 System.out.println();
             }
         }
@@ -89,14 +91,14 @@ public class Sudoku {
         
     }
 
-    public static void check() {
+    public static boolean check() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (grid[i][j] != ' ') {
                     for (int k = 0; k < 9; k++) {
                         if (grid[i][j] == grid[i][k] && k != j) {
                             System.out.println("Row " + (i) + " has multiple " + grid[i][j] + "'s!");
-                            return;
+                            return false;
                         }
                     }
                 }
@@ -109,7 +111,7 @@ public class Sudoku {
                     for (int k = 0; k < 9; k++) {
                         if (grid[j][i] == grid[k][i] && k != j) {
                             System.out.println("Column " + (i) + " has multiple " + grid[j][i] + "'s!");
-                            return;
+                            return false;
                         }
                     }
                 }
@@ -126,7 +128,7 @@ public class Sudoku {
                                     if (grid[m][n] == grid[x][y] && (m != x || n != y)) {
                                         System.out.println("Block at (" + (i - i % 3) + "," + (j - j % 3) +
                                                     ") has multiple " + grid[x][y] + "'s!");
-                                        return;
+                                        return false;
                                     }
                                 }
                             }
@@ -134,8 +136,8 @@ public class Sudoku {
                     }
                 }
             }
-        }
-        System.out.println("The sudoku is legal.");    
+        } 
+        return true;
     }
 }
 
