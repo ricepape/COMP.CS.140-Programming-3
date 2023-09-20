@@ -122,24 +122,7 @@ public class Sudoku {
         } 
         return true;
     }
-
-
-public static void main(String[] args) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader("input.txt"))){
-            String line;
-            Sudoku sudoku = new Sudoku();
-            while((line = reader.readLine()) != null){ ;
-                for (int i = 0; i < line.length(); i++){
-                    set(i / 9, i % 9, line.charAt(i));
-                }
-                print();
-                if(check()){
-                    System.out.println("The sudoku is legal.");    
-                };
-                System.out.println();
-            }
-        }
-    }
 }
+
 
 
