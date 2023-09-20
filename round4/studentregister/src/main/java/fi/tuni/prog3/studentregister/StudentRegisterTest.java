@@ -1,10 +1,8 @@
+package fi.tuni.prog3.studentregister;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import fi.tuni.prog3.studentregister.Attainment;
-import fi.tuni.prog3.studentregister.Course;
-import fi.tuni.prog3.studentregister.Student;
-import fi.tuni.prog3.studentregister.StudentRegister;
 
 public class StudentRegisterTest {
   public static void main(String[] args) throws IOException {

@@ -13,9 +13,9 @@ import java.util.Comparator;
  * @author vudinhthi2304
  */
 public class StudentRegister {
-    private ArrayList<Student> students;
-    private ArrayList<Course> courses;
-    private ArrayList<Attainment> attainments;
+    private final ArrayList<Student> students;
+    private final ArrayList<Course> courses;
+    private final ArrayList<Attainment> attainments;
 
     public StudentRegister(){
         students = new ArrayList<>();
