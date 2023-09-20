@@ -28,11 +28,11 @@ public class Sudoku {
     }
 
     public static void set (int i, int j, char c){
-        if (Character.isDigit(c) || c == ' '){
-            if (i>8){
+        if (i>8){
                 System.out.println("Trying to access illegal cell ("+i+", "+j+")!");
                 return;
             }
+        if (Character.isDigit(c) || c == ' '){
             grid[i][j] = c;
             return;
         }
