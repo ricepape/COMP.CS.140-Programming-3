@@ -65,6 +65,7 @@ public class StudentRegister {
         for (Student student : students) {
             if (studentNumber == student.getStudentNumber()){
                 studentName = student.getName();
+                break;
             }
         }
 
@@ -74,13 +75,14 @@ public class StudentRegister {
         } 
 
         System.out.println(studentName+" ("+studentNumber+"):");
-        ArrayList<Attainment> personal_attainments = new ArrayList<>();;
+        ArrayList<Attainment> personal_attainments = new ArrayList<>();
+        
         for (Attainment attainment : attainments) {
-            if (studentNumber == attainment.getStudentNumber()){
+            if (studentNumber.equals(attainment.getStudentNumber())){
                 personal_attainments.add(attainment);
             }
         }
-        if (order == "by code"){
+        if ("by code".equals(order)){
             ArrayList<Attainment> sortedAttainmentbyCode = new ArrayList<>(personal_attainments);
 
             Collections.sort(sortedAttainmentbyCode, new Comparator<Attainment>() {
@@ -93,7 +95,7 @@ public class StudentRegister {
                                     +" "+getCourseNamefromCode(attainment.getCourseCode())+": "
                                     +attainment.getGrade());
             }
-        } else if (order == "by name"){
+        } else if ("by name".equals(order)){
             ArrayList<Attainment> sortedAttainmentbyName = new ArrayList<>(personal_attainments);
 
             Collections.sort(sortedAttainmentbyName, new Comparator<Attainment>() {
@@ -117,37 +119,12 @@ public class StudentRegister {
     }  
 
     public void printStudentAttainments(String studentNumber) {
-        String studentName = null;
-    
-        for (Student student : students) {
-            if (studentNumber == student.getStudentNumber()){
-                studentName = student.getName();
-            }
-        }
-
-        if (studentName == null) {
-            System.out.println("Unknown student number: "+studentNumber);
-            return;
-        } 
-
-        System.out.println(studentName+" ("+studentNumber+"):");
-        ArrayList<Attainment> personal_attainments = new ArrayList<>();;
-        for (Attainment attainment : attainments) {
-            if (studentNumber == attainment.getStudentNumber()){
-                personal_attainments.add(attainment);
-            }
-        }
-        for (Attainment attainment : personal_attainments){
-                System.out.println("  "+attainment.getCourseCode()
-                                    +" "+getCourseNamefromCode(attainment.getCourseCode())+": "
-                                    +attainment.getGrade());
-            }
-
+        printStudentAttainments(studentNumber,"null");
     }
 
     private String getCourseNamefromCode(String courseCode){
         for (Course course : courses) {
-            if (courseCode == course.getCode()){
+            if (courseCode.equals(course.getCode())){
                 return course.getName();
             }
         }
