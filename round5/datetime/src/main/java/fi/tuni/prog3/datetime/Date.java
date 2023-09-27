@@ -13,27 +13,23 @@ public class Date {
     private final int month;
     private final int day;
 
-    public Date (int year, int month, int day){
-        try {
-            // Some code that might throw a DateException
-            throw new DateException("Illegal date ");
-        } catch (DateException e) {
-            if (day >= 29) {
-                if (month == 2) {
-                    if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
-                        // This condition checks if it's not a leap year
-                        System.err.println(e.getMessage() + String.format("%02d.%02d.%04d", day, month, year));
-                    }
-                } else if (day == 31) {
-                    // Handle cases where day is 31 based on the month
-                    if (month == 4 || month == 6 || month == 9 || month == 11) {
-                        System.err.println(e.getMessage() + String.format("%02d.%02d.%04d", day, month, year));
-                    }
-                } else if (day > 31 || month > 12){
-                    System.err.println(e.getMessage() + String.format("%02d.%02d.%04d", day, month, year));
+    public Date (int year, int month, int day) throws DateException{
+        if (day >= 29) {
+            if (month == 2) {
+                if (year % 4 != 0 || (year % 100 == 0 && year % 400 != 0)) {
+                    // This condition checks if it's not a leap year
+                    throw new DateException("Illegal date "+String.format("%02d.%02d.%04d", day, month, year));
                 }
+            } else if (day == 31) {
+                // Handle cases where day is 31 based on the month
+                if (month == 4 || month == 6 || month == 9 || month == 11) {
+                    throw new DateException("Illegal date "+ String.format("%02d.%02d.%04d", day, month, year));
+                }
+            } else if (day > 31 || month > 12){
+                throw new DateException("Illegal date "+ String.format("%02d.%02d.%04d", day, month, year));
             }
         }
+        
         this.year = year;
         this.month = month;
         this.day = day;

@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>fi.tuni.prog3.datetime.DateTime</exec.mainClass>
+        <exec.mainClass>fi.tuni.prog3.datetime.DateTimeTest</exec.mainClass>
     </properties>
      <build>
     <plugins>
@@ -20,7 +20,7 @@
         <executions>
           <execution>
             <configuration>
-              <mainClass>fi.tuni.prog3.datetime.DateTime</mainClass>
+              <mainClass>fi.tuni.prog3.datetime.DateTimeTest</mainClass>
               <onejarVersion>0.97</onejarVersion>
               <attachToBuild>true</attachToBuild>
             </configuration>
