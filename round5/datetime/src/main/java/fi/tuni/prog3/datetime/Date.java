@@ -43,7 +43,7 @@ public class Date {
         return month;
     }
 
-    public int getDate(){
+    public int getDay(){
         return day;
     }
     
