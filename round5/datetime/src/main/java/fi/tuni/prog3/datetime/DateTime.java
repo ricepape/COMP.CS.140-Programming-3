@@ -36,7 +36,7 @@ public class DateTime extends Date{
     }
     
     public String toString(){
-        String formattedDateTime = super.toString()+" "+String.format("%02d.%02d.%02d", hour, minute, second);
+        String formattedDateTime = super.toString()+" "+String.format("%02d:%02d:%02d", hour, minute, second);
         return formattedDateTime;
     }
 
