@@ -25,10 +25,11 @@ public class Date {
                 if (month == 4 || month == 6 || month == 9 || month == 11) {
                     throw new DateException("Illegal date "+ String.format("%02d.%02d.%04d", day, month, year));
                 }
-            } else if (day > 31 || month > 12){
+            } 
+        }
+        if (day > 31 || month > 12){
                 throw new DateException("Illegal date "+ String.format("%02d.%02d.%04d", day, month, year));
             }
-        }
         
         this.year = year;
         this.month = month;

@@ -16,7 +16,7 @@ public class DateTime extends Date{
     public DateTime (int year, int month, int day, int hour, int minute, int second) throws DateException{
         super(year, month, day);
         if (hour > 23 || minute > 59 || second > 59){
-            throw new DateException("Illegal time "+String.format("%02d.%02d.%02d", hour, minute, second));
+            throw new DateException("Illegal time "+String.format("%02d:%02d:%02d", hour, minute, second));
         }
         this.hour = hour;
         this.minute = minute;
