@@ -63,7 +63,7 @@ public class WordGame {
         is_active = false;
     }
 
-    void initGame(int wordIndex, int mistakeLimit){
+    public void initGame(int wordIndex, int mistakeLimit){
         word_master = words.get(wordIndex % N);
         gameState.mistakeLimit = mistakeLimit;
         gameState.missingChars = word_master.length();
@@ -75,11 +75,11 @@ public class WordGame {
         is_active = true;
     }
 
-    boolean isGameActive() {
+    public boolean isGameActive() {
         return is_active;
     }
 
-    WordGameState getGameState() throws GameStateException{
+    public WordGameState getGameState() throws GameStateException{
         if (!is_active){
             throw new GameStateException("There is currently no active word game!");
         } else {
@@ -87,7 +87,7 @@ public class WordGame {
         }
     }
 
-    WordGameState guess(char c) throws GameStateException{
+    public WordGameState guess(char c) throws GameStateException{
         WordGameState game = getGameState();
         int count = 0;
         for (int i = 0; i < game.word.length(); i++){
@@ -106,7 +106,7 @@ public class WordGame {
         
     }
 
-    WordGameState guess(String word) throws GameStateException{
+    public WordGameState guess(String word) throws GameStateException{
         WordGameState game = getGameState();
             if (word.toLowerCase().equals(word_master)){
                 game.missingChars = 0;
