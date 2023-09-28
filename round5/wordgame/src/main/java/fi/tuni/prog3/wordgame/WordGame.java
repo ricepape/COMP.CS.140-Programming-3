@@ -91,10 +91,15 @@ public class WordGame {
                 count +=1;
                 game.missingChars -=1;
                 game.word = game.word.substring(0, i) + Character.toLowerCase(c) + game.word.substring(i + 1);
+                word_master = word_master.substring(0, i)+"_"+word_master.substring(i + 1);
             }
         }
         if (count == 0){
             game.mistakes +=1;
+        }
+        if (game.mistakes > game.mistakeLimit){
+            game.word = word_master;
+            is_active = false;
         }
         return game;
         
@@ -102,14 +107,18 @@ public class WordGame {
 
     public WordGameState guess(String word) throws GameStateException{
         WordGameState game = getGameState();
-            if (word.toLowerCase().equals(word_master)){
-                game.missingChars = 0;
-                game.word = word_master;
-                is_active = false;
-            }
-            else {
-                game.mistakes += 1;
-            }
+        if (word.toLowerCase().equals(word_master)){
+            game.missingChars = 0;
+            game.word = word_master;
+            is_active = false;
+        }
+        else {
+            game.mistakes += 1;
+        }
+        if (game.mistakes > game.mistakeLimit){
+            game.word = word_master;
+            is_active = false;
+        }
         return game;
         
     }
