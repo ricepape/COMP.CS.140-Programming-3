@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class WordGame {
 
     private WordGameState gameState;
-    private ArrayList<String> words;
+    private final ArrayList<String> words;
     private boolean is_active;
     private String word_master;
-    private int N;
+    private final int N;
 
     public static class WordGameState {
         private String word;
@@ -108,7 +108,7 @@ public class WordGame {
 
     WordGameState guess(String word) throws GameStateException{
         WordGameState game = getGameState();
-            if (word.toLowerCase() == (word_master)){
+            if (word.toLowerCase().equals(word_master)){
                 game.missingChars = 0;
                 game.word = word_master;
                 is_active = false;
