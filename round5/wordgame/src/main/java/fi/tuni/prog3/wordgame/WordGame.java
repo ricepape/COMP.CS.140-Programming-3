@@ -19,6 +19,7 @@ public class WordGame {
     private final ArrayList<String> words;
     private boolean is_active;
     private String word_master;
+    private String test_word_master;
     private final int N;
 
     public static class WordGameState {
@@ -65,6 +66,7 @@ public class WordGame {
 
     public void initGame(int wordIndex, int mistakeLimit) {
         word_master = words.get(wordIndex % N);
+        test_word_master = words.get(wordIndex % N);
         String initialWord = "_".repeat(word_master.length());
         gameState = new WordGameState(initialWord, 0, mistakeLimit, word_master.length());
         is_active = true;
@@ -86,12 +88,12 @@ public class WordGame {
         WordGameState game = getGameState();
         int count = 0;
         for (int i = 0; i < game.word.length(); i++){
-            if (Character.toLowerCase(word_master.charAt(i)) == 
+            if (Character.toLowerCase(test_word_master.charAt(i)) == 
             Character.toLowerCase(c)){
                 count +=1;
                 game.missingChars -=1;
                 game.word = game.word.substring(0, i) + Character.toLowerCase(c) + game.word.substring(i + 1);
-                word_master = word_master.substring(0, i)+"_"+word_master.substring(i + 1);
+                test_word_master = test_word_master.substring(0, i)+"_"+test_word_master.substring(i + 1);
             }
         }
         if (count == 0){
