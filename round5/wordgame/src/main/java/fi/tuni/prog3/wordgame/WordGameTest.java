@@ -1,3 +1,4 @@
+package fi.tuni.prog3.wordgame;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
