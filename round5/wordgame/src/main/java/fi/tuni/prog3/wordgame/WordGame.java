@@ -63,15 +63,10 @@ public class WordGame {
         is_active = false;
     }
 
-    public void initGame(int wordIndex, int mistakeLimit){
+    public void initGame(int wordIndex, int mistakeLimit) {
         word_master = words.get(wordIndex % N);
-        gameState.mistakeLimit = mistakeLimit;
-        gameState.missingChars = word_master.length();
-        String a = "";
-        for (int i = 0; i < gameState.missingChars; i++){
-            a = a+"_";
-        }
-        gameState.word = a;
+        String initialWord = "_".repeat(word_master.length());
+        gameState = new WordGameState(initialWord, mistakeLimit, 0, word_master.length());
         is_active = true;
     }
 
@@ -95,8 +90,7 @@ public class WordGame {
             Character.toLowerCase(c)){
                 count +=1;
                 game.missingChars -=1;
-                game.word = game.word.substring(0, i-1) + c
-              + game.word.substring(i + 1);
+                game.word = game.word.substring(0, i) + c + game.word.substring(i + 1);
             }
         }
         if (count == 0){
