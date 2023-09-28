@@ -99,6 +99,9 @@ public class WordGame {
         if (count == 0){
             game.mistakes +=1;
         }
+        if (game.word == word_master){
+            is_active = false;
+        }
         if (game.mistakes > game.mistakeLimit){
             game.word = word_master;
             is_active = false;
