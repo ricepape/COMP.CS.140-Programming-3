@@ -55,12 +55,12 @@ public class Attainment implements Comparable<Attainment> {
     public static final Comparator<Attainment> CODE_STUDENT_CMP = new Comparator<Attainment>() {
         @Override
         public int compare(Attainment attainment1, Attainment attainment2) {
-            int studentNumberComparison = attainment1.studentNumber.compareTo(attainment2.studentNumber);
-            if (studentNumberComparison != 0) {
-                return studentNumberComparison;
+            int courseCodeComparison = attainment1.courseCode.compareTo(attainment2.courseCode);
+            if (courseCodeComparison != 0) {
+                return courseCodeComparison;
             }
-
-            return attainment1.courseCode.compareTo(attainment2.courseCode);
+            return Integer.compare(Integer.parseInt(attainment2.studentNumber), 
+                                    Integer.parseInt(attainment1.studentNumber));
         }
     };
 }
