@@ -59,8 +59,8 @@ public class Attainment implements Comparable<Attainment> {
             if (courseCodeComparison != 0) {
                 return courseCodeComparison;
             }
-            return Integer.compare(Integer.parseInt(attainment2.studentNumber), 
-                                    Integer.parseInt(attainment1.studentNumber));
+            return Integer.compare(Integer.parseInt(attainment1.studentNumber), 
+                                    Integer.parseInt(attainment2.studentNumber));
         }
     };
 }
