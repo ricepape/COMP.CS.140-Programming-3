@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>fi.tuni.prog3.jsoncountries.Country</exec.mainClass>
+        <exec.mainClass>fi.tuni.prog3.jsoncountries.CountryTest</exec.mainClass>
     </properties>
  <build>
     <plugins>
@@ -34,7 +34,7 @@
         <executions>
           <execution>
             <configuration>
-              <mainClass>fi.tuni.prog3.jsoncountries.Country</mainClass>
+              <mainClass>fi.tuni.prog3.jsoncountries.CountryTest</mainClass>
               <onejarVersion>0.97</onejarVersion>
               <attachToBuild>true</attachToBuild>
             </configuration>
