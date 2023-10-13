@@ -1,91 +1,85 @@
 package fi.tuni.prog3.jsoncountries;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CountryData {
     public static List<Country> readFromJsons(String areaFile, String populationFile, String gdpFile) {
         List<Country> countries = new ArrayList<>();
 
-        try {
-            List<JsonObject> areaData = readJsonFile(areaFile);
-            List<JsonObject> populationData = readJsonFile(populationFile);
-            List<JsonObject> gdpData = readJsonFile(gdpFile);
+        // Read data from the three JSON files.
+        JsonObject areaData = readJsonFromFile(areaFile);
+        JsonObject populationData = readJsonFromFile(populationFile);
+        JsonObject gdpData = readJsonFromFile(gdpFile);
 
-            for (JsonObject record : areaData) {
-                JsonObject data = record.getAsJsonObject("Root").getAsJsonObject("data");
-                JsonObject attributes = data.getAsJsonArray("record").get(0).getAsJsonObject();
-                String countryName = attributes.get("value").getAsString();
-                double countryArea = Double.parseDouble(data.getAsJsonArray("record").get(2).getAsJsonObject().get("value").getAsString());
-                long countryPopulation = findPopulationByCountryName(populationData, countryName);
-                double countryGDP = findGDPByCountryName(gdpData, countryName);
+        // Iterate over the country records in one of the JSON files (assuming they have the same countries).
+        for (String countryName : areaData.keySet()) {
+            double area = areaData.get(countryName).getAsJsonObject().get("attributes").getAsJsonObject().get("area").getAsDouble();
+            int population = populationData.get(countryName).getAsJsonObject().get("attributes").getAsJsonObject().get("population").getAsInt();
+            double gdp = gdpData.get(countryName).getAsJsonObject().get("attributes").getAsJsonObject().get("gdp").getAsDouble();
 
-                Country country = new Country(countryName, countryArea, countryPopulation, countryGDP);
-                countries.add(country);
-            }
-        } catch (IOException | JsonSyntaxException e) {
-            e.printStackTrace();
+            // Create a Country object and add it to the list.
+            Country country = new Country(countryName, area, population, gdp);
+            countries.add(country);
         }
 
         return countries;
     }
 
-    private static long findPopulationByCountryName(List<JsonObject> populationData, String countryName) {
-        for (JsonObject populationRecord : populationData) {
-            JsonObject populationData2 = populationRecord.getAsJsonObject("Root").getAsJsonObject("data");
-            JsonObject populationAttributes = populationData2.getAsJsonArray("record").get(0).getAsJsonObject();
-            if (countryName.equals(populationAttributes.get("value").getAsString())) {
-                return Long.parseLong(populationData2.getAsJsonArray("record").get(2).getAsJsonObject().get("value").getAsString());
-            }
-        }
-        return 0;
-    }
-
-    private static double findGDPByCountryName(List<JsonObject> gdpData, String countryName) {
-        for (JsonObject gdpRecord : gdpData) {
-            JsonObject gdpData2 = gdpRecord.getAsJsonObject("Root").getAsJsonObject("data");
-            JsonObject gdpAttributes = gdpData2.getAsJsonArray("record").get(0).getAsJsonObject();
-            if (countryName.equals(gdpAttributes.get("value").getAsString())) {
-                return Double.parseDouble(gdpData2.getAsJsonArray("record").get(2).getAsJsonObject().get("value").getAsString());
-            }
-        }
-        return 0.0;
-    }
-
-    private static List<JsonObject> readJsonFile(String filePath) throws IOException {
-        List<JsonObject> data = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
-                data.add(jsonObject);
-            }
-        }
-        return data;
-    }
-
     public static void writeToJson(List<Country> countries, String countryFile) {
-        // Create a Gson instance with pretty printing enabled
+        // Create a JSON array of JSON objects for each country.
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser parser = new JsonParser();
+        StringBuilder jsonOutput = new StringBuilder();
+        jsonOutput.append("[\n");
 
-        try (FileWriter fileWriter = new FileWriter(countryFile)) {
-            // Convert the list of Country objects to a JSON array
-            String jsonArray = gson.toJson(countries);
+        for (Country country : countries) {
+            JsonObject countryObject = new JsonObject();
+            countryObject.addProperty("name", country.getName());
+            countryObject.addProperty("area", country.getArea());
+            countryObject.addProperty("population", country.getPopulation());
+            countryObject.addProperty("gdp", country.getGdp());
 
-            // Write the JSON array to the file
-            fileWriter.write(jsonArray);
+            String countryJson = gson.toJson(countryObject);
+            jsonOutput.append(countryJson);
+            jsonOutput.append(",\n");
+        }
+
+        jsonOutput.deleteCharAt(jsonOutput.length() - 2);  // Remove the trailing comma and newline.
+        jsonOutput.append("]");
+
+        // Write the JSON data to the specified file.
+        try (Writer writer = new FileWriter(countryFile)) {
+            writer.write(jsonOutput.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private static JsonObject readJsonFromFile(String filename) {
+    try {
+        // Create a FileReader to read the JSON file
+        FileReader fileReader = new FileReader(filename);
+
+        // Parse the JSON using GSON's JsonParser
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = jsonParser.parse(fileReader).getAsJsonObject();
+
+        // Close the file reader
+        fileReader.close();
+
+        return jsonObject;
+    } catch (JsonIOException | JsonSyntaxException | IOException e) {
+        e.printStackTrace();
+        return null; // Handle the exception as needed
+    }
+}
 }
