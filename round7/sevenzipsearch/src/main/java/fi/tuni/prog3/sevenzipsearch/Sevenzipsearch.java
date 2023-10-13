@@ -12,8 +12,8 @@ import org.apache.commons.compress.archivers.sevenz.SevenZFile;
 public class Sevenzipsearch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("File: ");
-        System.out.println("Query: ");
+        System.out.println("File:");
+        System.out.println("Query:");
         String archiveFileName = scanner.nextLine();
         String searchWord = scanner.nextLine();
         System.out.println();
