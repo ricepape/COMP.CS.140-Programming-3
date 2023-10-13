@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package fi.tuni.prog3.jsoncountries;
 
 import java.io.BufferedReader;
@@ -17,10 +13,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSyntaxException;
 
-/**
- *
- * @author vudinhthi2304
- */
 public class CountryData {
     public static List<Country> readFromJsons(String areaFile, String populationFile, String gdpFile) {
         List<Country> countries = new ArrayList<>();
@@ -30,22 +22,25 @@ public class CountryData {
             List<JsonObject> populationData = readJsonFile(populationFile);
             List<JsonObject> gdpData = readJsonFile(gdpFile);
 
-            for (JsonObject areaObject : areaData) {
-                String countryName = areaObject.get("name").getAsString();
-                double countryArea = areaObject.get("value").getAsDouble();
+            for (JsonObject record : areaData) {
+                JsonObject attributes = record.getAsJsonObject("attributes");
+                String countryName = attributes.get("value").getAsString();
+                double countryArea = Double.parseDouble(record.get("value").getAsString());
                 long countryPopulation = 0;
                 double countryGDP = 0;
 
-                for (JsonObject populationObject : populationData) {
-                    if (countryName.equals(populationObject.get("name").getAsString())) {
-                        countryPopulation = populationObject.get("value").getAsLong();
+                for (JsonObject populationRecord : populationData) {
+                    JsonObject populationAttributes = populationRecord.getAsJsonObject("attributes");
+                    if (countryName.equals(populationAttributes.get("value").getAsString())) {
+                        countryPopulation = Long.parseLong(populationRecord.get("value").getAsString());
                         break;
                     }
                 }
 
-                for (JsonObject gdpObject : gdpData) {
-                    if (countryName.equals(gdpObject.get("name").getAsString())) {
-                        countryGDP = gdpObject.get("value").getAsDouble();
+                for (JsonObject gdpRecord : gdpData) {
+                    JsonObject gdpAttributes = gdpRecord.getAsJsonObject("attributes");
+                    if (countryName.equals(gdpAttributes.get("value").getAsString())) {
+                        countryGDP = Double.parseDouble(gdpRecord.get("value").getAsString());
                         break;
                     }
                 }
@@ -61,28 +56,23 @@ public class CountryData {
     }
 
     private static List<JsonObject> readJsonFile(String filename) {
-    List<JsonObject> data = new ArrayList<>();
+        List<JsonObject> data = new ArrayList<>();
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            try {
-                JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
-                data.add(jsonObject);
-            } catch (JsonSyntaxException e) {
-                // Handle JSON syntax errors here
-                System.err.println("Error parsing JSON: " + e.getMessage());
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                try {
+                    JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
+                    data.add(jsonObject);
+                } catch (JsonSyntaxException e) {
+                    System.err.println("Error parsing JSON: " + e.getMessage());
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        // Handle file I/O errors here
-        e.printStackTrace();
+        return data;
     }
-    return data;
-    }
-
-
-
 
     public static void writeToJson(List<Country> countries, String countryFile) {
         // Create a Gson instance with pretty printing enabled
