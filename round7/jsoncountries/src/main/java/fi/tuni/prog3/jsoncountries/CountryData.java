@@ -24,57 +24,53 @@ public class CountryData {
 
             for (JsonObject record : areaData) {
                 JsonObject data = record.getAsJsonObject("Root").getAsJsonObject("data");
-                JsonObject attributes = data.getAsJsonObject("record").getAsJsonArray("field").get(0).getAsJsonObject();
+                JsonObject attributes = data.getAsJsonArray("record").get(0).getAsJsonObject();
                 String countryName = attributes.get("value").getAsString();
-                double countryArea = Double.parseDouble(data.getAsJsonObject("record").getAsJsonArray("field").get(2).getAsJsonObject().get("value").getAsString());
-                long countryPopulation = 0;
-                double countryGDP = 0;
-
-                for (JsonObject populationRecord : populationData) {
-                    JsonObject populationData2 = populationRecord.getAsJsonObject("Root").getAsJsonObject("data");
-                    JsonObject populationAttributes = populationData2.getAsJsonObject("record").getAsJsonArray("field").get(0).getAsJsonObject();
-                    if (countryName.equals(populationAttributes.get("value").getAsString())) {
-                        countryPopulation = Long.parseLong(populationData2.getAsJsonObject("record").getAsJsonArray("field").get(2).getAsJsonObject().get("value").getAsString());
-                        break;
-                    }
-                }
-
-                for (JsonObject gdpRecord : gdpData) {
-                    JsonObject gdpData2 = gdpRecord.getAsJsonObject("Root").getAsJsonObject("data");
-                    JsonObject gdpAttributes = gdpData2.getAsJsonObject("record").getAsJsonArray("field").get(0).getAsJsonObject();
-                    if (countryName.equals(gdpAttributes.get("value").getAsString())) {
-                        countryGDP = Double.parseDouble(gdpData2.getAsJsonObject("record").getAsJsonArray("field").get(2).getAsJsonObject().get("value").getAsString());
-                        break;
-                    }
-                }
+                double countryArea = Double.parseDouble(data.getAsJsonArray("record").get(2).getAsJsonObject().get("value").getAsString());
+                long countryPopulation = findPopulationByCountryName(populationData, countryName);
+                double countryGDP = findGDPByCountryName(gdpData, countryName);
 
                 Country country = new Country(countryName, countryArea, countryPopulation, countryGDP);
                 countries.add(country);
             }
-        } catch (Exception e) {
+        } catch (IOException | JsonSyntaxException e) {
             e.printStackTrace();
         }
 
         return countries;
     }
 
-    private static List<JsonObject> readJsonFile(String filename) {
-        List<JsonObject> data = new ArrayList<>();
-    
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                try {
-                    JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
-                    data.add(jsonObject);
-                } catch (JsonSyntaxException e) {
-                    System.err.println("Error parsing JSON: " + e.getMessage());
-                }
+    private static long findPopulationByCountryName(List<JsonObject> populationData, String countryName) {
+        for (JsonObject populationRecord : populationData) {
+            JsonObject populationData2 = populationRecord.getAsJsonObject("Root").getAsJsonObject("data");
+            JsonObject populationAttributes = populationData2.getAsJsonArray("record").get(0).getAsJsonObject();
+            if (countryName.equals(populationAttributes.get("value").getAsString())) {
+                return Long.parseLong(populationData2.getAsJsonArray("record").get(2).getAsJsonObject().get("value").getAsString());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        
+        return 0;
+    }
+
+    private static double findGDPByCountryName(List<JsonObject> gdpData, String countryName) {
+        for (JsonObject gdpRecord : gdpData) {
+            JsonObject gdpData2 = gdpRecord.getAsJsonObject("Root").getAsJsonObject("data");
+            JsonObject gdpAttributes = gdpData2.getAsJsonArray("record").get(0).getAsJsonObject();
+            if (countryName.equals(gdpAttributes.get("value").getAsString())) {
+                return Double.parseDouble(gdpData2.getAsJsonArray("record").get(2).getAsJsonObject().get("value").getAsString());
+            }
+        }
+        return 0.0;
+    }
+
+    private static List<JsonObject> readJsonFile(String filePath) throws IOException {
+        List<JsonObject> data = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
+                data.add(jsonObject);
+            }
+        }
         return data;
     }
 
