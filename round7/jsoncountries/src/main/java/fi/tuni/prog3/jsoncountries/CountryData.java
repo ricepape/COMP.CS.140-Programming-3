@@ -25,23 +25,16 @@ public class CountryData {
         List<Country> countries = new ArrayList<>();
 
         try {
-            // Read data from the area file
             List<JsonObject> areaData = readJsonFile(areaFile);
-
-            // Read data from the population file
             List<JsonObject> populationData = readJsonFile(populationFile);
-
-            // Read data from the GDP file
             List<JsonObject> gdpData = readJsonFile(gdpFile);
 
-            // Combine data from the three files into Country objects
             for (JsonObject areaObject : areaData) {
                 String countryName = areaObject.get("name").getAsString();
                 double countryArea = areaObject.get("value").getAsDouble();
-                long countryPopulation = 0; // Initialize to 0
-                double countryGDP = 0; // Initialize to 0
+                long countryPopulation = 0;
+                double countryGDP = 0;
 
-                // Find corresponding population and GDP data for the country
                 for (JsonObject populationObject : populationData) {
                     if (countryName.equals(populationObject.get("name").getAsString())) {
                         countryPopulation = populationObject.get("value").getAsLong();
@@ -56,7 +49,6 @@ public class CountryData {
                     }
                 }
 
-                // Create a Country object and add it to the list
                 Country country = new Country(countryName, countryArea, countryPopulation, countryGDP);
                 countries.add(country);
             }
@@ -67,9 +59,7 @@ public class CountryData {
         return countries;
     }
 
-    // Helper method to read JSON data from a file
-    private static List<JsonObject> readJsonFile(String filename) throws Exception {
-        Gson gson = new Gson();
+    private static List<JsonObject> readJsonFile(String filename) {
         List<JsonObject> data = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -78,6 +68,8 @@ public class CountryData {
                 JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
                 data.add(jsonObject);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return data;
