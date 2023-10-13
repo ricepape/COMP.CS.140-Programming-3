@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 /**
  *
@@ -60,20 +61,28 @@ public class CountryData {
     }
 
     private static List<JsonObject> readJsonFile(String filename) {
-        List<JsonObject> data = new ArrayList<>();
+    List<JsonObject> data = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            try {
                 JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
                 data.add(jsonObject);
+            } catch (JsonSyntaxException e) {
+                // Handle JSON syntax errors here
+                System.err.println("Error parsing JSON: " + e.getMessage());
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-
-        return data;
+    } catch (IOException e) {
+        // Handle file I/O errors here
+        e.printStackTrace();
     }
+    return data;
+    }
+
+
+
 
     public static void writeToJson(List<Country> countries, String countryFile) {
         // Create a Gson instance with pretty printing enabled
