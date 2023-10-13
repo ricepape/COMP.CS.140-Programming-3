@@ -1,15 +1,15 @@
 package fi.tuni.prog3.sevenzipsearch;
 
+import org.apache.commons.compress.archivers.sevenz.SevenZArchiveEntry;
+import org.apache.commons.compress.archivers.sevenz.SevenZFile;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.RandomAccessFile;
 import java.util.Scanner;
 
-import net.sf.sevenzipjbinding.*;
-
-public class SearchIn7zFiles {
+public class Sevenzipsearch {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("File: ");
@@ -19,36 +19,25 @@ public class SearchIn7zFiles {
         System.out.println();
 
         try {
-            SevenZip.initSevenZipFromPlatformJAR();
+            SevenZFile sevenZFile = new SevenZFile(new File(archiveFileName));
 
-            File archiveFile = new File(archiveFileName);
-
-            if (!archiveFile.exists() || !archiveFile.isFile() || !archiveFile.getName().endsWith(".7z")) {
-                System.err.println("Invalid 7z file.");
-                return;
-            }
-
-            IInArchive archive = SevenZip.openInArchive(null, new RandomAccessFile(archiveFile, "r"));
-
-            if (archive == null) {
-                System.err.println("Failed to open the 7z archive.");
-                return;
-            }
-
-            for (ISimpleInArchiveItem item : archive.getSimpleInterface().getArchiveItems()) {
-                if (item.getPath().toLowerCase().endsWith(".txt")) {
-                    System.out.println("File: " + item.getPath());
-                    searchInTextFile(item, searchWord);
+            SevenZArchiveEntry entry;
+            while ((entry = sevenZFile.getNextEntry()) != null) {
+                if (entry.getName().toLowerCase().endsWith(".txt")) {
+                    System.out.println("File: " + entry.getName());
+                    searchInTextFile(sevenZFile, searchWord);
                     System.out.println();
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            scanner.close(); 
         }
     }
 
-    private static void searchInTextFile(ISimpleInArchiveItem item, String searchWord) throws Exception {
-        InputStream inputStream = item.getExtractableData();
+    private static void searchInTextFile(SevenZFile sevenZFile, String searchWord) throws Exception {
+        InputStream inputStream = sevenZFile.getInputStream(null);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
         String line;
