@@ -4,17 +4,17 @@
  */
 package fi.tuni.prog3.jsoncountries;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  *
@@ -22,37 +22,65 @@ import com.google.gson.GsonBuilder;
  */
 public class CountryData {
     public static List<Country> readFromJsons(String areaFile, String populationFile, String gdpFile) {
-        List<Country> countries = new ArrayList<>(); // Initialize the list
+        List<Country> countries = new ArrayList<>();
 
         try {
-            // Create ObjectMapper
-            ObjectMapper objectMapper = new ObjectMapper();
-            ArrayNode areaData = (ArrayNode) objectMapper.readTree(new File(areaFile));
-            ArrayNode populationData = (ArrayNode) objectMapper.readTree(new File(populationFile));
-            ArrayNode gdpData = (ArrayNode) objectMapper.readTree(new File(gdpFile));
+            // Read data from the area file
+            List<JsonObject> areaData = readJsonFile(areaFile);
 
-            for (int i = 0; i < areaData.size(); i++) {
-                // Extract data for the current country
-                JsonNode areaNode = areaData.get(i);
-                JsonNode populationNode = populationData.get(i);
-                JsonNode gdpNode = gdpData.get(i);
+            // Read data from the population file
+            List<JsonObject> populationData = readJsonFile(populationFile);
 
-                // Extract relevant attributes
-                String name = areaNode.get("attributes").get("name").asText();
-                double area = areaNode.get("attributes").get("value").asDouble();
-                long population = populationNode.get("attributes").get("value").asLong();
-                double gdp = gdpNode.get("attributes").get("value").asDouble();
+            // Read data from the GDP file
+            List<JsonObject> gdpData = readJsonFile(gdpFile);
+
+            // Combine data from the three files into Country objects
+            for (JsonObject areaObject : areaData) {
+                String countryName = areaObject.get("name").getAsString();
+                double countryArea = areaObject.get("value").getAsDouble();
+                long countryPopulation = 0; // Initialize to 0
+                double countryGDP = 0; // Initialize to 0
+
+                // Find corresponding population and GDP data for the country
+                for (JsonObject populationObject : populationData) {
+                    if (countryName.equals(populationObject.get("name").getAsString())) {
+                        countryPopulation = populationObject.get("value").getAsLong();
+                        break;
+                    }
+                }
+
+                for (JsonObject gdpObject : gdpData) {
+                    if (countryName.equals(gdpObject.get("name").getAsString())) {
+                        countryGDP = gdpObject.get("value").getAsDouble();
+                        break;
+                    }
+                }
 
                 // Create a Country object and add it to the list
-                Country country = new Country(name, area, population, gdp);
+                Country country = new Country(countryName, countryArea, countryPopulation, countryGDP);
                 countries.add(country);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            // Handle the exception, you might want to log the error or re-throw a custom exception
         }
 
         return countries;
+    }
+
+    // Helper method to read JSON data from a file
+    private static List<JsonObject> readJsonFile(String filename) throws Exception {
+        Gson gson = new Gson();
+        List<JsonObject> data = new ArrayList<>();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                JsonObject jsonObject = JsonParser.parseString(line).getAsJsonObject();
+                data.add(jsonObject);
+            }
+        }
+
+        return data;
     }
 
     public static void writeToJson(List<Country> countries, String countryFile) {
