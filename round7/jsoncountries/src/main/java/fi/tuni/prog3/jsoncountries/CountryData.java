@@ -23,24 +23,27 @@ public class CountryData {
             List<JsonObject> gdpData = readJsonFile(gdpFile);
 
             for (JsonObject record : areaData) {
-                JsonObject attributes = record.getAsJsonObject("attributes");
+                JsonObject data = record.getAsJsonObject("Root").getAsJsonObject("data");
+                JsonObject attributes = data.getAsJsonObject("record").getAsJsonArray("field").get(0).getAsJsonObject();
                 String countryName = attributes.get("value").getAsString();
-                double countryArea = Double.parseDouble(record.get("value").getAsString());
+                double countryArea = Double.parseDouble(data.getAsJsonObject("record").getAsJsonArray("field").get(2).getAsJsonObject().get("value").getAsString());
                 long countryPopulation = 0;
                 double countryGDP = 0;
 
                 for (JsonObject populationRecord : populationData) {
-                    JsonObject populationAttributes = populationRecord.getAsJsonObject("attributes");
+                    JsonObject populationData2 = populationRecord.getAsJsonObject("Root").getAsJsonObject("data");
+                    JsonObject populationAttributes = populationData2.getAsJsonObject("record").getAsJsonArray("field").get(0).getAsJsonObject();
                     if (countryName.equals(populationAttributes.get("value").getAsString())) {
-                        countryPopulation = Long.parseLong(populationRecord.get("value").getAsString());
+                        countryPopulation = Long.parseLong(populationData2.getAsJsonObject("record").getAsJsonArray("field").get(2).getAsJsonObject().get("value").getAsString());
                         break;
                     }
                 }
 
                 for (JsonObject gdpRecord : gdpData) {
-                    JsonObject gdpAttributes = gdpRecord.getAsJsonObject("attributes");
+                    JsonObject gdpData2 = gdpRecord.getAsJsonObject("Root").getAsJsonObject("data");
+                    JsonObject gdpAttributes = gdpData2.getAsJsonObject("record").getAsJsonArray("field").get(0).getAsJsonObject();
                     if (countryName.equals(gdpAttributes.get("value").getAsString())) {
-                        countryGDP = Double.parseDouble(gdpRecord.get("value").getAsString());
+                        countryGDP = Double.parseDouble(gdpData2.getAsJsonObject("record").getAsJsonArray("field").get(2).getAsJsonObject().get("value").getAsString());
                         break;
                     }
                 }
@@ -57,7 +60,7 @@ public class CountryData {
 
     private static List<JsonObject> readJsonFile(String filename) {
         List<JsonObject> data = new ArrayList<>();
-
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -71,6 +74,7 @@ public class CountryData {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         return data;
     }
 
