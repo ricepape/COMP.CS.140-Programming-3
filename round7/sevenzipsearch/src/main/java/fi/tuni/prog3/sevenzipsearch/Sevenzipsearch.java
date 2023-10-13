@@ -14,7 +14,6 @@ public class Sevenzipsearch {
         Scanner scanner = new Scanner(System.in);
         System.out.println("File: ");
         System.out.println("Query: ");
-        System.out.println();
         String archiveFileName = scanner.nextLine();
         String searchWord = scanner.nextLine();
         System.out.println();
@@ -25,7 +24,7 @@ public class Sevenzipsearch {
             SevenZArchiveEntry entry;
             while ((entry = sevenZFile.getNextEntry()) != null) {
                 if (entry.getName().toLowerCase().endsWith(".txt")) {
-                    System.out.println("File: " + entry.getName());
+                    System.out.println(entry.getName());
                     searchInTextFile(sevenZFile, searchWord, entry);
                     System.out.println();
                 }
