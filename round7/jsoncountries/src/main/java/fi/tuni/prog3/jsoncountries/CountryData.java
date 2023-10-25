@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package fi.tuni.prog3.jsoncountries;
 
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,16 +8,12 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.reflect.TypeToken;
 
-/**
- *
- * @author vudinhthi2304
- */
 public class CountryData {
-    public static List<Country> readFromJsons(String areaFile, String populationFile, String gdpFile) {
+    public static List<Country> readFromJsons(String areaFile, String populationFile, String gdpFile) throws IOException {
         List<Country> countries = new ArrayList<>();
 
         List<JsonObject> areaData = readJsonFile(areaFile);
@@ -42,18 +33,51 @@ public class CountryData {
         return countries;
     }
 
-    private static List<JsonObject> readJsonFile(String jsonFilePath) {
-        List<JsonObject> data = new ArrayList<>();
-
-        try (FileReader reader = new FileReader(jsonFilePath)) {
-            Gson gson = new Gson();
-            JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
-            data = gson.fromJson(root.getAsJsonArray("records"), new TypeToken<List<JsonObject>>(){}.getType());
-        } catch (Exception e) {
-            e.printStackTrace();
+    private static List<JsonObject> readJsonFile(String fileName) throws IOException {
+        List<JsonObject> jsonObjects = new ArrayList<>();
+        Gson gson = new Gson();
+    
+        try (FileReader reader = new FileReader(fileName)) {
+            JsonObject rootObject = gson.fromJson(reader, JsonObject.class);
+    
+            if (rootObject != null) {
+                JsonObject dataObject = rootObject.getAsJsonObject("Root")
+                        .getAsJsonObject("data");
+    
+                if (dataObject != null) {
+                    JsonArray records = dataObject.getAsJsonArray("record");
+    
+                    if (records != null) {
+                        for (JsonElement recordElement : records) {
+                            JsonObject record = recordElement.getAsJsonObject();
+    
+                            JsonArray fields = record.getAsJsonArray("field");
+    
+                            if (fields != null && fields.size() == 3) {
+                                JsonObject nameObj = fields.get(0).getAsJsonObject();
+                                JsonObject itemObj = fields.get(1).getAsJsonObject();
+                                JsonObject valueObj = fields.get(2).getAsJsonObject();
+    
+                                if (nameObj.has("value") && itemObj.has("value") && valueObj.has("value")) {
+                                    String name = nameObj.get("value").getAsString();
+                                    String item = itemObj.get("value").getAsString();
+                                    double value = valueObj.get("value").getAsDouble();
+    
+                                    JsonObject jsonObject = new JsonObject();
+                                    jsonObject.addProperty("name", name);
+                                    jsonObject.addProperty("item", item);
+                                    jsonObject.addProperty("value", value);
+    
+                                    jsonObjects.add(jsonObject);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-        return data;
+    
+        return jsonObjects;
     }
 
     public static void writeToJson(List<Country> countries, String countryFile) {
@@ -67,6 +91,7 @@ public class CountryData {
             // Write the JSON array to the file
             fileWriter.write(jsonArray);
         } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception properly, e.g., log it
         }
     }
 }
