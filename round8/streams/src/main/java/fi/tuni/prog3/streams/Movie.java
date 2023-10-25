@@ -16,7 +16,7 @@ public class Movie {
     private double score;
     private String director;
 
-        private Movie(String title, int releaseYear, int duration, String genre, double score, String director) {
+        public Movie(String title, int releaseYear, int duration, String genre, double score, String director) {
             this.title = title;
             this.releaseYear = releaseYear;
             this.duration = duration;

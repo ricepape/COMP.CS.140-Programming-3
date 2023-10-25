@@ -30,7 +30,7 @@ public class MovieAnalytics {
         };
     }
 
-    void populateWithData(String fileName){
+    public void populateWithData(String fileName){
         try {
             Stream<String> lines = Files.lines(Paths.get(fileName));
             lines.forEach(line -> {
@@ -51,19 +51,19 @@ public class MovieAnalytics {
         }
     }
 
-    Stream<Movie> moviesAfter(int year){
+    public Stream<Movie> moviesAfter(int year){
         return movies.stream().filter(movie -> movie.getReleaseYear() >= year);
     }
 
-    Stream<Movie> moviesBefore(int year){
+    public Stream<Movie> moviesBefore(int year){
         return movies.stream().filter(movie -> movie.getReleaseYear() <= year);
     }
 
-    Stream<Movie> moviesBetween(int yearA, int yearB){
+    public Stream<Movie> moviesBetween(int yearA, int yearB){
         return movies.stream().filter(movie -> movie.getReleaseYear() >= yearA && movie.getReleaseYear() <= yearB);
     }
 
-    Stream<Movie> moviesByDirector(String director){
+    public Stream<Movie> moviesByDirector(String director){
         return movies.stream().filter(movie -> movie.getDirector().equals(director));
     }
 
