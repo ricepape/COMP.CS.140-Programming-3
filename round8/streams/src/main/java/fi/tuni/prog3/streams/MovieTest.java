@@ -1,3 +1,5 @@
+package fi.tuni.prog3.streams;
+
 import fi.tuni.prog3.streams.Movie;
 import fi.tuni.prog3.streams.MovieAnalytics;
 import java.io.IOException;
