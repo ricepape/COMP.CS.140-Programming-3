@@ -52,19 +52,19 @@ public class MovieAnalytics {
     }
 
     public Stream<Movie> moviesAfter(int year){
-        return movies.stream().filter(movie -> movie.getReleaseYear() >= year);
+        return movies.stream().filter(movie -> movie.getReleaseYear() >= year).sorted();
     }
 
     public Stream<Movie> moviesBefore(int year){
-        return movies.stream().filter(movie -> movie.getReleaseYear() <= year);
+        return movies.stream().filter(movie -> movie.getReleaseYear() <= year).sorted();
     }
 
     public Stream<Movie> moviesBetween(int yearA, int yearB){
-        return movies.stream().filter(movie -> movie.getReleaseYear() >= yearA && movie.getReleaseYear() <= yearB);
+        return movies.stream().filter(movie -> movie.getReleaseYear() >= yearA && movie.getReleaseYear() <= yearB).sorted();
     }
 
     public Stream<Movie> moviesByDirector(String director){
-        return movies.stream().filter(movie -> movie.getDirector().equals(director));
+        return movies.stream().filter(movie -> movie.getDirector().equals(director)).sorted();
     }
 
 }
