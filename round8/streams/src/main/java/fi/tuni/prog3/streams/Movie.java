@@ -51,28 +51,15 @@ public class Movie implements Comparable<Movie> {
             return director;
         }
     
+        @Override
         public int compareTo(Movie other) {
-            if (this.releaseYear < other.releaseYear) {
-                return this.releaseYear;
-            } else if (this.releaseYear > other.releaseYear) {
-                return other.releaseYear;
-            } else {
-                // If release years are the same, compare by title
-                return this.title.compareTo(other.title);
-            }
+        if (this.releaseYear < other.releaseYear) {
+            return -1; // Return a negative number to indicate "this" is less than "other"
+        } else if (this.releaseYear > other.releaseYear) {
+            return 1; // Return a positive number to indicate "this" is greater than "other"
+        } else {
+            // If release years are the same, compare by title
+            return this.title.compareTo(other.title);
         }
-
-        public static final Comparator<Movie> TITLE_CMP = new Comparator<Movie>() {
-            @Override
-            public int compare(Movie movie1, Movie movie2) {
-                int titleComparison = movie1.title.compareTo(movie2.title);
-                if (titleComparison != 0) {
-                    return titleComparison;
-                }
-                return Integer.compare(movie1.releaseYear, movie2.releaseYear);
-            }
-        };
-
-        
-    
+    }
 }
