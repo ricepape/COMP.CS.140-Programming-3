@@ -62,6 +62,17 @@ public class Movie implements Comparable<Movie> {
             }
         }
 
+        public static final Comparator<Movie> TITLE_CMP = new Comparator<Movie>() {
+            @Override
+            public int compare(Movie movie1, Movie movie2) {
+                int titleComparison = movie1.title.compareTo(movie2.title);
+                if (titleComparison != 0) {
+                    return titleComparison;
+                }
+                return Integer.compare(movie1.releaseYear, movie2.releaseYear);
+            }
+        };
+
         
     
 }
