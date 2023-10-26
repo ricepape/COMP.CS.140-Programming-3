@@ -4,11 +4,13 @@
  */
 package fi.tuni.prog3.streams;
 
+import java.util.Comparator;
+
 /**
  *
  * @author vudinhthi2304
  */
-public class Movie {
+public class Movie implements Comparable<Movie> {
     private String title;
     private int releaseYear;
     private int duration;
@@ -49,5 +51,17 @@ public class Movie {
             return director;
         }
     
+        public int compareTo(Movie other) {
+            if (this.releaseYear < other.releaseYear) {
+                return this.releaseYear;
+            } else if (this.releaseYear > other.releaseYear) {
+                return other.releaseYear;
+            } else {
+                // If release years are the same, compare by title
+                return this.title.compareTo(other.title);
+            }
+        }
+
+        
     
 }

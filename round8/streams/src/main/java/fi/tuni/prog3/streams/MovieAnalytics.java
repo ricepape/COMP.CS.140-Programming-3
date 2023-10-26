@@ -53,19 +53,19 @@ public class MovieAnalytics {
     }
 
     public Stream<Movie> moviesAfter(int year){
-        return movies.stream().filter(movie -> movie.getReleaseYear() >= year).sorted(Comparator.comparing(Movie::getReleaseYear).thenComparing(Comparator.comparing(Movie::getTitle)));
+        return movies.stream().filter(movie -> movie.getReleaseYear() >= year).sorted(Movie::compareTo);
     }
 
     public Stream<Movie> moviesBefore(int year){
-        return movies.stream().filter(movie -> movie.getReleaseYear() <= year).sorted(Comparator.comparing(Movie::getReleaseYear).thenComparing(Comparator.comparing(Movie::getTitle)));
+        return movies.stream().filter(movie -> movie.getReleaseYear() <= year).sorted(Movie::compareTo);
     }
 
     public Stream<Movie> moviesBetween(int yearA, int yearB){
-        return movies.stream().filter(movie -> movie.getReleaseYear() >= yearA && movie.getReleaseYear() <= yearB).sorted(Comparator.comparing(Movie::getReleaseYear).thenComparing(Comparator.comparing(Movie::getTitle)));
+        return movies.stream().filter(movie -> movie.getReleaseYear() >= yearA && movie.getReleaseYear() <= yearB).sorted(Movie::compareTo);
     }
 
     public Stream<Movie> moviesByDirector(String director){
-        return movies.stream().filter(movie -> movie.getDirector().equals(director)).sorted().sorted(Comparator.comparing(Movie::getReleaseYear).thenComparing(Comparator.comparing(Movie::getTitle)));
+        return movies.stream().filter(movie -> movie.getDirector().equals(director)).sorted(Movie::compareTo);
     }
 
 }
