@@ -2,24 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package fi.tuni.prog3.streams;
+package fi.tuni.prog3.streams2;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  *
  * @author vudinhthi2304
  */
-public class MovieAnalytics {
+public class MovieAnalytics2 {
     public List<Movie> movies;
 
-    public MovieAnalytics() {
+    public MovieAnalytics2() {
         this.movies = new ArrayList<>();
     }
     
@@ -51,20 +54,33 @@ public class MovieAnalytics {
         }
     }
 
-    public Stream<Movie> moviesAfter(int year){
-        return movies.stream().filter(movie -> movie.getReleaseYear() >= year).sorted(Movie::compareTo);
+    public void printCountByDirector(int n){
+        Map<String, Long> directorMovieCount = movies.stream()
+        .collect(Collectors.groupingBy(Movie::getDirector, Collectors.counting()));
+
+    directorMovieCount.entrySet().stream()
+        .sorted(Map.Entry.<String, Long>comparingByValue().reversed())
+        .limit(n)
+        .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue() + " movies"));
     }
 
-    public Stream<Movie> moviesBefore(int year){
-        return movies.stream().filter(movie -> movie.getReleaseYear() <= year).sorted(Movie::compareTo);
+    public void printAverageDurationByGenre(){
+        Map<String, Double> directorMovieCount = movies.stream()
+        .collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingInt(Movie::getDuration)));
+
+    directorMovieCount.entrySet().stream()
+        .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+        .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
     }
 
-    public Stream<Movie> moviesBetween(int yearA, int yearB){
-        return movies.stream().filter(movie -> movie.getReleaseYear() >= yearA && movie.getReleaseYear() <= yearB).sorted(Movie::compareTo);
-    }
+    public void printAverageScoreByGenre(){
+        Map<String, Double> directorMovieCount = movies.stream()
+        .collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingDouble(Movie::getScore)));
 
-    public Stream<Movie> moviesByDirector(String director){
-        return movies.stream().filter(movie -> movie.getDirector().equals(director)).sorted(Movie::compareTo);
+    directorMovieCount.entrySet().stream()
+        .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
+        .forEach(entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+       
     }
 
 }
