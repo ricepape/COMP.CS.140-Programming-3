@@ -70,7 +70,7 @@ public class MovieAnalytics2 {
         .collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingInt(Movie::getDuration)));
 
         AverageDurationByGenre.entrySet().stream()
-        .sorted(Map.Entry.<String, Double>comparingByValue().reversed()
+        .sorted(Map.Entry.<String, Double>comparingByValue()
         .thenComparing(Map.Entry.<String, Double>comparingByKey()))
         .forEach(entry -> System.out.format("%s: %.2f%n", entry.getKey(), entry.getValue()));
     }
