@@ -66,24 +66,23 @@ public class MovieAnalytics2 {
     }
 
     public void printAverageDurationByGenre(){
-        Map<String, Double> directorMovieCount = movies.stream()
+        Map<String, Double> AverageDurationByGenre = movies.stream()
         .collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingInt(Movie::getDuration)));
 
-    directorMovieCount.entrySet().stream()
-        .sorted(Map.Entry.<String, Double>comparingByValue()
+        AverageDurationByGenre.entrySet().stream()
+        .sorted(Map.Entry.<String, Double>comparingByValue().reversed()
         .thenComparing(Map.Entry.<String, Double>comparingByKey()))
-        .forEach(entry -> System.out.format(entry.getKey() + ": .%02d",entry.getValue()));
+        .forEach(entry -> System.out.format("%s: %.2f%n", entry.getKey(), entry.getValue()));
     }
 
     public void printAverageScoreByGenre(){
-        Map<String, Double> directorMovieCount = movies.stream()
+        Map<String, Double> AverageScoreByGenre = movies.stream()
         .collect(Collectors.groupingBy(Movie::getGenre, Collectors.averagingDouble(Movie::getScore)));
 
-    directorMovieCount.entrySet().stream()
+        AverageScoreByGenre.entrySet().stream()
         .sorted(Map.Entry.<String, Double>comparingByValue().reversed()
         .thenComparing(Map.Entry.<String, Double>comparingByKey()))
-        .forEach(entry -> System.out.format(entry.getKey() + ": .%02d",entry.getValue()));
-       
-    }
+        .forEach(entry -> System.out.format("%s: %.2f%n", entry.getKey(), entry.getValue()));
 
+    }
 }
