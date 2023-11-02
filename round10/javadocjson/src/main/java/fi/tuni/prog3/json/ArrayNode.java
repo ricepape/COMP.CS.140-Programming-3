@@ -27,7 +27,7 @@ public class ArrayNode extends Node implements Iterable<Node>{
     }
 
     /**
-    * Returns a Node iterator that iterates the JSON nodes stored in this JSON.
+    * Returns a Node iterator that iterates the JSON nodes stored in this JSON array.
     */
     @Override
     public Iterator<Node> iterator() {
