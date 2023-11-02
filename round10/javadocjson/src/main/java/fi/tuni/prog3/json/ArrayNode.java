@@ -1,9 +1,3 @@
-/**
- * Provides the classes needed for Programming 3 exercise JSON
- * <p>
- * @author N.N.
- * @since 1.0
- */
 package fi.tuni.prog3.json;
 
 import java.util.ArrayList;
@@ -11,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Provides the classes needed for Programming 3 exercise JSON
+ * A class for representing a JSON array.
  * <p>
  * @author Thi Vu
  * @since 1.0

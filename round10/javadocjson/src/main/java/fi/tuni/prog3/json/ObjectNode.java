@@ -1,9 +1,3 @@
-/**
- * Provides the classes needed for Programming 3 exercise JSON
- * <p>
- * @author N.N.
- * @since 1.0
- */
 package fi.tuni.prog3.json;
 
 import java.util.Iterator;
@@ -11,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Represents a JSON object node that stores key-value pairs in a natural sorted order of keys.
+ * A class for representing a JSON object.
  * <p>
  * @author Thi Vu
  * @since 1.0
