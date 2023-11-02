@@ -6,9 +6,6 @@ import java.util.List;
 
 /**
  * A class for representing a JSON array.
- * <p>
- * @author Thi Vu
- * @since 1.0
  */
 public class ArrayNode extends Node implements Iterable<Node>{
     private final List<Node> nodes;

@@ -2,9 +2,6 @@ package fi.tuni.prog3.json;
 
 /**
  * A class for representing a JSON value.
- * <p>
- * @author Thi Vu
- * @since 1.0
  */
 public class ValueNode extends Node{
     private final Object value;
