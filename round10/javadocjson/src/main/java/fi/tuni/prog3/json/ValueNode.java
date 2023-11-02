@@ -35,10 +35,15 @@ public class ValueNode extends Node{
     /**
      * Constructs a JSON value node that stores the given string.
      *
-     * @param value The string to store in the new JSON value node.
+     * @param value The string to store in the new JSON value node. 
+     * @throws IllegalStateException if the parameter value is null.
      */
     public ValueNode(String value) {
-        this.value = value;
+        if (value != null) {
+            this.value = value;
+        } else {
+            throw new IllegalStateException("Value is null.");
+        }
     }
 
     /**
