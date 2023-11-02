@@ -1,13 +1,7 @@
-/**
- * Provides the classes needed for Programming 3 exercise JSON
- * <p>
- * @author N.N.
- * @since 1.0
- */
 package fi.tuni.prog3.json;
 
 /**
- * Represents a JSON value node that stores different types of values, such as boolean, double, string, or null.
+ * A class for representing a JSON value.
  * <p>
  * @author Thi Vu
  * @since 1.0
