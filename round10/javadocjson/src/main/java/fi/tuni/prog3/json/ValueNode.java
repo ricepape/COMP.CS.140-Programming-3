@@ -15,20 +15,20 @@ public class ValueNode extends Node{
     }
 
     /**
-     * Constructs a JSON value node that stores the given boolean value.
-     *
-     * @param value The boolean value to store.
-     */
-    public ValueNode(boolean value) {
-        this.value = value;
-    }
-
-    /**
      * Constructs a JSON value node that stores the given double value.
      *
      * @param value The double value to store.
      */
     public ValueNode(double value) {
+        this.value = value;
+    }
+
+    /**
+     * Constructs a JSON value node that stores the given boolean value.
+     *
+     * @param value The boolean value to store.
+     */
+    public ValueNode(boolean value) {
         this.value = value;
     }
 
