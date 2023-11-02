@@ -6,36 +6,36 @@ package fi.tuni.prog3.json;
 public abstract class Node {
 
   /**
-   * Constructs a new Node object.
+   * The only constructor.
    */
   protected Node () {}
 
   /**
-   * Check if the node is an array node.
-   * @return true if the node is an array node, otherwise false.
+   * Checks whether this node represents a JSON array.
+   * @return true if the node represents a JSON array, otherwise false.
    */
   public boolean isArray() {
     return this instanceof ArrayNode;
   }
 
   /**
-   * Check if the node is an object node.
-   * @return true if the node is an object node, otherwise false.
+   * Checks whether this node represents a JSON object.
+   * @return true if the node represents a JSON object, otherwise false.
    */
   public boolean isObject() {
     return this instanceof ObjectNode;
   }
 
   /**
-   * Check if the node is a value node.
-   * @return true if the node is a value node, otherwise false.
+   * Checks whether this node represents a JSON value.
+   * @return true if the node represents a JSON value, otherwise false.
    */
   public boolean isValue() {
     return this instanceof ValueNode;
   }
 
   /**
-   * Print the JSON representation of the node to the standard output.
+   * Prints the JSON data to the screen.
    */
   public void printJson() {
     StringBuilder sb = new StringBuilder();
