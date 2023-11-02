@@ -1,13 +1,13 @@
 /**
  * Provides the classes needed for Programming 3 exercise JSON
  * <p>
- * @author N.N.
+ * @author Thi Vu
  * @since 1.0
  */
 package fi.tuni.prog3.json;
 
 /**
- * An abstract class representing nodes in a JSON structure.
+ * An abstract super class for different types of JSON nodes.
  * <p>
  * @author Thi Vu
  * @since 1.0
