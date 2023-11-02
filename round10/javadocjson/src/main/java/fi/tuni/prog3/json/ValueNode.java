@@ -42,38 +42,46 @@ public class ValueNode extends Node{
     }
 
     /**
-     * Returns the stored value as a boolean value.
+     * Checks whether this value node stores a number (double).
      *
-     * @return The stored boolean value.
-     * @throws IllegalStateException if the value is not a boolean.
+     * @return true if this node stores a double value, otherwise false.
      */
-    public boolean getBoolean() {
-        if (isBoolean()) {
-            return (boolean) value;
-        } else {
-            throw new IllegalStateException("Value is not a boolean.");
-        }
+    public boolean isNumber() {
+        return value instanceof Double;
     }
 
     /**
-     * Returns the stored value as null.
+     * Checks whether this value node stores a boolean value.
      *
-     * @return The stored null value.
-     * @throws IllegalStateException if the value is not null.
+     * @return true if this node stores a boolean value, otherwise false.
      */
-    public Object getNull() {
-        if (isNull()) {
-            return value;
-        } else {
-            throw new IllegalStateException("Value is not null.");
-        }
+    public boolean isBoolean() {
+        return value instanceof Boolean;
+    }
+
+    /**
+     * Checks whether this value node stores a string.
+     *
+     * @return true if this node stores a string, otherwise false.
+     */
+    public boolean isString() {
+        return value instanceof String;
+    }
+
+    /**
+     * Checks whether this value node stores null.
+     *
+     * @return true if this node stores null, otherwise false.
+     */
+    public boolean isNull() {
+        return value == null;
     }
 
     /**
      * Returns the stored value as a number (double).
      *
-     * @return The stored double value.
-     * @throws IllegalStateException if the value is not a double.
+     * @return the stored number as a double value.
+     * @throws IllegalStateException - if the value is not a double.
      */
     public double getNumber() {
         if (isNumber()) {
@@ -84,10 +92,24 @@ public class ValueNode extends Node{
     }
 
     /**
+     * Returns the stored value as a boolean value.
+     *
+     * @return the stored boolean value.
+     * @throws IllegalStateException - if the stored value is not a boolean value.
+     */
+    public boolean getBoolean() {
+        if (isBoolean()) {
+            return (boolean) value;
+        } else {
+            throw new IllegalStateException("Value is not a boolean.");
+        }
+    }
+
+    /**
      * Returns the stored value as a string.
      *
-     * @return The stored string value.
-     * @throws IllegalStateException if the value is not a string.
+     * @return the stored string.
+     * @throws IllegalStateException - if the stored value is not a string.
      */
     public String getString() {
         if (isString()) {
@@ -98,38 +120,16 @@ public class ValueNode extends Node{
     }
 
     /**
-     * Checks whether this value node stores a boolean value.
-     *
-     * @return true if the stored value is a boolean, otherwise false.
+     * Returns the stored value as null.
+     * @return null.
+     * @throws IllegalStateException - if the stored value is not null.
      */
-    public boolean isBoolean() {
-        return value instanceof Boolean;
+    public Object getNull() {
+        if (isNull()) {
+            return value;
+        } else {
+            throw new IllegalStateException("Value is not null.");
+        }
     }
-
-    /**
-     * Checks whether this value node stores null.
-     *
-     * @return true if the stored value is null, otherwise false.
-     */
-    public boolean isNull() {
-        return value == null;
-    }
-
-    /**
-     * Checks whether this value node stores a number (double).
-     *
-     * @return true if the stored value is a number, otherwise false.
-     */
-    public boolean isNumber() {
-        return value instanceof Double;
-    }
-
-    /**
-     * Checks whether this value node stores a string.
-     *
-     * @return true if the stored value is a string, otherwise false.
-     */
-    public boolean isString() {
-        return value instanceof String;
-    }
+    
 }

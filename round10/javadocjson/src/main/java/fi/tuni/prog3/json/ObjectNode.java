@@ -18,44 +18,48 @@ public class ObjectNode extends Node implements Iterable<String> {
     }
 
     /**
+     * Returns the number of JSON nodes stored under this JSON object.
+     *
+     * @return the number of JSON nodes under this JSON object.
+     */
+    public int size() {
+        return keyValuePairs.size();
+    }
+
+    /**
      * Returns the JSON node stored under the given name.
      *
-     * @param key The key to retrieve the associated Node.
-     * @return Node associated with the specified key or null if the key is not found.
+     * @param name - the name of the name-node pair whose node should be returned.
+     * @return the JSON node corresponding to name, or null if such node does not exist.
      */
-    public Node get(String key) {
-        return keyValuePairs.get(key);
+    public Node get(String name) {
+        return keyValuePairs.get(name);
+    }
+
+    /**
+     * Stores a name - JSON node pair into this JSON object.
+     *
+     * @param name  - the name of the name-node pair.
+     * @param node - the JSON node of the name-node pair.
+     */
+    public void set(String key, Node name) {
+        keyValuePairs.put(key, name);
     }
 
     /**
      * Returns a String iterator that iterates the names of the name-node pairs
      * stored in this JSON object in natural String order.
      *
-     * @return An iterator over the keys in the JSON object.
+     * @return a String iterator that iterates the names of the stored name-node pairs in natural String order.
      */
     @Override
     public Iterator<String> iterator() {
         return keyValuePairs.keySet().iterator();
     }
 
-    /**
-     * Stores a name - JSON node pair into this JSON object.
-     *
-     * @param key  The key to add or update.
-     * @param node The Node to associate with the key.
-     */
-    public void set(String key, Node node) {
-        keyValuePairs.put(key, node);
-    }
+    
 
-    /**
-     * Returns the number of JSON nodes stored under this JSON object.
-     *
-     * @return The number of key-value pairs in the JSON object.
-     */
-    public int size() {
-        return keyValuePairs.size();
-    }
+    
 
 }
 

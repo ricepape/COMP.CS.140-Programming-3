@@ -27,19 +27,19 @@ public class ArrayNode extends Node implements Iterable<Node>{
     }
 
     /**
+    * Adds a new JSON node to the end of this JSON array.
+    * @param node   The current node to be added.
+    */
+    public void add(Node node) {
+        nodes.add(node);
+    }
+
+    /**
     * Returns a Node iterator that iterates the JSON nodes stored in this JSON array.
     * @return a Node iterator that iterates the JSON nodes stored in this JSON array.
     */
     @Override
     public Iterator<Node> iterator() {
         return nodes.iterator();
-    }
-
-    /**
-    * Adds a new JSON node to the end of this JSON array.
-    * @param node   The current node to be added.
-    */
-    public void add(Node node) {
-        nodes.add(node);
     }
 }
