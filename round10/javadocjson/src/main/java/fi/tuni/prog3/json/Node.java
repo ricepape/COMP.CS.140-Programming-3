@@ -11,19 +11,19 @@ public abstract class Node {
   protected Node () {}
 
   /**
-   * Checks whether this node represents a JSON array.
-   * @return true if the node represents a JSON array, otherwise false.
-   */
-  public boolean isArray() {
-    return this instanceof ArrayNode;
-  }
-
-  /**
    * Checks whether this node represents a JSON object.
    * @return true if the node represents a JSON object, otherwise false.
    */
   public boolean isObject() {
     return this instanceof ObjectNode;
+  }
+
+  /**
+   * Checks whether this node represents a JSON array.
+   * @return true if the node represents a JSON array, otherwise false.
+   */
+  public boolean isArray() {
+    return this instanceof ArrayNode;
   }
 
   /**
