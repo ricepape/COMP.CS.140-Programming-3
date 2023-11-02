@@ -1,6 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * Provides the classes needed for Programming 3 exercise JSON
+ * <p>
+ * @author N.N.
+ * @since 1.0
  */
 package fi.tuni.prog3.json;
 
