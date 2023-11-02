@@ -17,7 +17,7 @@ public class ValueNode extends Node{
     /**
      * Constructs a JSON value node that stores the given double value.
      *
-     * @param value The double value to store.
+     * @param value The double value to store in the new JSON value node.
      */
     public ValueNode(double value) {
         this.value = value;
@@ -26,7 +26,7 @@ public class ValueNode extends Node{
     /**
      * Constructs a JSON value node that stores the given boolean value.
      *
-     * @param value The boolean value to store.
+     * @param value The boolean value to store in the new JSON value node.
      */
     public ValueNode(boolean value) {
         this.value = value;
@@ -35,7 +35,7 @@ public class ValueNode extends Node{
     /**
      * Constructs a JSON value node that stores the given string.
      *
-     * @param value The string value to store.
+     * @param value The string to store in the new JSON value node.
      */
     public ValueNode(String value) {
         this.value = value;
