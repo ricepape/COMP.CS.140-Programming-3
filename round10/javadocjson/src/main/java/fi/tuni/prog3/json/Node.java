@@ -6,6 +6,35 @@ package fi.tuni.prog3.json;
 public abstract class Node {
 
   /**
+   * Constructs a new Node object.
+   */
+  protected Node () {}
+
+  /**
+   * Check if the node is an array node.
+   * @return true if the node is an array node, otherwise false.
+   */
+  public boolean isArray() {
+    return this instanceof ArrayNode;
+  }
+
+  /**
+   * Check if the node is an object node.
+   * @return true if the node is an object node, otherwise false.
+   */
+  public boolean isObject() {
+    return this instanceof ObjectNode;
+  }
+
+  /**
+   * Check if the node is a value node.
+   * @return true if the node is a value node, otherwise false.
+   */
+  public boolean isValue() {
+    return this instanceof ValueNode;
+  }
+
+  /**
    * Print the JSON representation of the node to the standard output.
    */
   public void printJson() {
@@ -14,8 +43,14 @@ public abstract class Node {
     System.out.println(sb.toString());
   }
 
+  /**
+   * Print the JSON representation of the node to the standard output.
+   */
   private static final String NL = System.lineSeparator();
 
+  /**
+   * Print the JSON representation of the node to the standard output.
+   */
   private static String numberToString(Double d) {
     String str = Double.toString(d);
     if(str.endsWith(".0")) {
@@ -26,6 +61,13 @@ public abstract class Node {
 
   private static final String CNL = "," + System.lineSeparator();
 
+  /**
+   * Helper method to print the JSON representation of the node to the standard output.
+   *
+   * @param node   The current node to be printed.
+   * @param sb     The StringBuilder to which the JSON representation is appended.
+   * @param depth  The current depth of the JSON structure.
+   */
   private void printJson(Node node, StringBuilder sb, int depth) {
     final String indent = "  ".repeat(depth);
     final String subIndent = "  ".repeat(depth + 1);
@@ -79,30 +121,6 @@ public abstract class Node {
       }
       sb.append(valStr);
     }
-  }
-  
-  /**
-   * Check if the node is an array node.
-   * @return true if the node is an array node, otherwise false.
-   */
-  public boolean isArray() {
-    return this instanceof ArrayNode;
-  }
-
-  /**
-   * Check if the node is an object node.
-   * @return true if the node is an object node, otherwise false.
-   */
-  public boolean isObject() {
-    return this instanceof ObjectNode;
-  }
-
-  /**
-   * Check if the node is a value node.
-   * @return true if the node is a value node, otherwise false.
-   */
-  public boolean isValue() {
-    return this instanceof ValueNode;
   }
 
 }
