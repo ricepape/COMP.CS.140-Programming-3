@@ -33,7 +33,7 @@ public class ValueNode extends Node{
     }
 
     /**
-     * Initializes the ValueNode with a string value.
+     * Constructs a JSON value node that stores the given string.
      *
      * @param value The string value to store.
      */
