@@ -42,8 +42,8 @@ public class ObjectNode extends Node implements Iterable<String> {
      * @param name  - the name of the name-node pair.
      * @param node - the JSON node of the name-node pair.
      */
-    public void set(String key, Node name) {
-        keyValuePairs.put(key, name);
+    public void set(String name, Node node) {
+        keyValuePairs.put(name, node);
     }
 
     /**
