@@ -1,5 +1,13 @@
 package fi.tuni.prog3.json;
 
+
+
+/**
+ * An abstract class representing nodes in a JSON structure.
+ * <p>
+ * @author Thi Vu
+ * @since 1.0
+ */
 public abstract class Node {
 
   /**
