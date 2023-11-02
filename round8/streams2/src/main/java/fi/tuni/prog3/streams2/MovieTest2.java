@@ -1,6 +1,5 @@
 package fi.tuni.prog3.streams2;
 
-import fi.tuni.prog3.streams2.MovieAnalytics2;
 import java.io.IOException;
 public class MovieTest2 {
   public static void main(String[] args)
