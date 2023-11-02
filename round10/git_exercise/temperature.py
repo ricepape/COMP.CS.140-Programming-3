@@ -15,14 +15,14 @@ def main():
 def t_transform(temp, type):
 
     if type == 'c':
-        return float(temp * 9/15 + 32)
+        return float(temp * 9/5 + 32)
 
     return None
 
 def f_transform(temp, type):
 
     if type == 'c':
-        return float((temp-32) * 15/9)
+        return float((temp-32) * 5/9)
 
     return None
 
