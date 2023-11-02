@@ -11,14 +11,14 @@ public class ObjectNode extends Node implements Iterable<String> {
     private final Map<String, Node> keyValuePairs;
 
     /**
-     * Initializes an empty JSON object.
+     * Constructs an initially empty JSON object node.
      */
     public ObjectNode() {
         this.keyValuePairs = new TreeMap<>(); // TreeMap to maintain natural sorted order of keys
     }
 
     /**
-     * Get the Node object corresponding to the specified key.
+     * Returns the JSON node stored under the given name.
      *
      * @param key The key to retrieve the associated Node.
      * @return Node associated with the specified key or null if the key is not found.
@@ -28,7 +28,8 @@ public class ObjectNode extends Node implements Iterable<String> {
     }
 
     /**
-     * Implement the Iterable interface to iterate over keys in a natural sorted order.
+     * Returns a String iterator that iterates the names of the name-node pairs
+     * stored in this JSON object in natural String order.
      *
      * @return An iterator over the keys in the JSON object.
      */
@@ -38,7 +39,7 @@ public class ObjectNode extends Node implements Iterable<String> {
     }
 
     /**
-     * Add a key-value pair or update the value if the key already exists.
+     * Stores a name - JSON node pair into this JSON object.
      *
      * @param key  The key to add or update.
      * @param node The Node to associate with the key.
@@ -48,7 +49,7 @@ public class ObjectNode extends Node implements Iterable<String> {
     }
 
     /**
-     * Returns the number of stored key-value pairs in the JSON object.
+     * Returns the number of JSON nodes stored under this JSON object.
      *
      * @return The number of key-value pairs in the JSON object.
      */

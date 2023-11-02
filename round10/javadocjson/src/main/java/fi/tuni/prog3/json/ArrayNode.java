@@ -8,26 +8,37 @@ import java.util.List;
  * A class for representing a JSON array.
  */
 public class ArrayNode extends Node implements Iterable<Node>{
+    
     private final List<Node> nodes;
 
-    // Default constructor initializes an empty array
+    /**
+    * Constructs an initially empty JSON array node.
+    */
     public ArrayNode() {
         this.nodes = new ArrayList<>();
     }
 
-    // Add a Node to the end of the array
+    /**
+    * Adds a new JSON node to the end of this JSON array.
+    * @param node   The current node to be added.
+    */
     public void add(Node node) {
         nodes.add(node);
     }
 
-    // Return the number of stored Node objects
-    public int size() {
-        return nodes.size();
-    }
-
-    // Implement the Iterable interface
+    /**
+    * Returns a Node iterator that iterates the JSON nodes stored in this JSON.
+    */
     @Override
     public Iterator<Node> iterator() {
         return nodes.iterator();
     }
+
+    /**
+    * Returns the number of JSON nodes stored in this JSON array.
+    */
+    public int size() {
+        return nodes.size();
+    }
+
 }
