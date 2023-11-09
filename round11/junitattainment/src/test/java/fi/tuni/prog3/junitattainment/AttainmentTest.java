@@ -35,6 +35,22 @@ public class AttainmentTest {
     @org.junit.jupiter.api.AfterEach
     public void tearDown() throws Exception {
     }
+    
+    @BeforeAll
+    public static void setUpClass() {
+    }
+    
+    @AfterAll
+    public static void tearDownClass() {
+    }
+    
+    @BeforeEach
+    public void setUp() {
+    }
+    
+    @AfterEach
+    public void tearDown() {
+    }
 
     /**
      * Test of getCourseCode method, of class Attainment.
