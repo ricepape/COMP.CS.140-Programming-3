@@ -66,10 +66,28 @@ public class AttainmentTest {
 
     @Test
     public void testCompareTo() {
-        Attainment other = new Attainment("CS100", "123456", 4);
+        Attainment other = new Attainment("CS101", "151394898", 4);
         Attainment instance = new Attainment("CS100", "151394898", 5);
-        int expResult = 3; // Adjust this based on your compareTo logic
+        int expResult = -1;
         int result = instance.compareTo(other);
         assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testConstructor() {
+        // Test valid constructor
+        Attainment instance = new Attainment("CS100", "151394898", 5);
+
+        // Check that values are set correctly
+        assertEquals("CS100", instance.getCourseCode());
+        assertEquals("151394898", instance.getStudentNumber());
+        assertEquals(5, instance.getGrade());
+    }
+
+    @Test
+    public void testInvalidConstructor() {
+        // Test constructor with invalid parameters
+        Attainment instance = new Attainment("CS100", "151394898", -1);
+        assertEquals(IllegalArgumentException.class, instance);
     }
 }
