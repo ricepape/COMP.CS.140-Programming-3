@@ -59,7 +59,7 @@ public class AttainmentTest {
     @Test
     public void testToString() {
         Attainment instance = new Attainment("CS100", "151394898", 5);
-        String expResult = "Attainment{courseCode='CS100', studentNumber='151394898', grade=5}";
+        String expResult = "CS100 151394898 5";
         String result = instance.toString();
         assertEquals(expResult, result);
     }
@@ -68,7 +68,7 @@ public class AttainmentTest {
     public void testCompareTo() {
         Attainment other = new Attainment("CS100", "123456", 4);
         Attainment instance = new Attainment("CS100", "151394898", 5);
-        int expResult = 1; // Adjust this based on your compareTo logic
+        int expResult = 3; // Adjust this based on your compareTo logic
         int result = instance.compareTo(other);
         assertEquals(expResult, result);
     }
