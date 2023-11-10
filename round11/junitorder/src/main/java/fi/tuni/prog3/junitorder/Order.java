@@ -149,6 +149,9 @@ public class Order {
         if (count <= 0) {
             throw new IllegalArgumentException("Item unit count must be positive");
         }
+        if (entries.isEmpty()) {
+            throw new IllegalArgumentException("Item not found");
+        }
 
         for (Entry entry : entries) {
             if (entry.getItem().getName().equals(name)) {

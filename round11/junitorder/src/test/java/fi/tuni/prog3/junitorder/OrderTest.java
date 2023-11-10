@@ -171,6 +171,15 @@ public class OrderTest {
         Order.Item item = new Order.Item("Item1", 10.0);
         assertThrows(IllegalArgumentException.class, () ->  order.addItems(item, -5));
     }   
-    
 
+    @Test
+    public void testRemoveItemsFromEmptyOrder() {
+        Order order = new Order();
+        String name = "Item1";
+        int count = 3;
+
+        assertTrue(order.isEmpty());
+
+        assertThrows(IllegalArgumentException.class, () -> order.removeItems(name, count));
+    }
 }
