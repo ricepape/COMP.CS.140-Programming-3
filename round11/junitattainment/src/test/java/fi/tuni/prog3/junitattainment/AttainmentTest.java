@@ -87,7 +87,6 @@ public class AttainmentTest {
     @Test
     public void testInvalidConstructor() {
         // Test constructor with invalid parameters
-        Attainment instance = new Attainment("CS100", "151394898", -1);
-        assertEquals(IllegalArgumentException.class, instance);
+        assertThrows(IllegalArgumentException.class, () -> new Attainment("CS100", "151394898", -1));
     }
 }
