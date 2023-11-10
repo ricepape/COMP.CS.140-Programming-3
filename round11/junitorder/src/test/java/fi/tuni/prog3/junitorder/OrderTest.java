@@ -54,9 +54,11 @@ public class OrderTest {
     @Test
     public void testAddItems_String_int() {
         System.out.println("addItems");
+        Order.Item item = new Order.Item("milk", 10.0);
         String name = "milk";
         int count = 2;
         Order instance = new Order();
+        instance.addItems(item, count);
         boolean expResult = true;
         boolean result = instance.addItems(name, count);
         assertEquals(expResult, result);
