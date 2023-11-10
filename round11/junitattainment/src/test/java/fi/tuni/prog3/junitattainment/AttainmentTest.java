@@ -42,7 +42,7 @@ public class AttainmentTest {
     @org.junit.jupiter.api.Test
     public void testGetCourseCode() {
         System.out.println("getCourseCode");
-        Attainment instance = null;
+        Attainment instance = new Attainment("CS100", "151394898", 5);;
         String expResult = "";
         String result = instance.getCourseCode();
         assertEquals(expResult, result);
@@ -70,7 +70,7 @@ public class AttainmentTest {
     @org.junit.jupiter.api.Test
     public void testGetGrade() {
         System.out.println("getGrade");
-        Attainment instance = null;
+        Attainment instance = new Attainment("CS100", "151394898", 5);;
         int expResult = 0;
         int result = instance.getGrade();
         assertEquals(expResult, result);
@@ -98,7 +98,7 @@ public class AttainmentTest {
     @org.junit.jupiter.api.Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        Attainment other = new Attainment("CS100", "151324898", 4);
+        Attainment other = new Attainment("CS100", "123456", 4);
         Attainment instance = new Attainment("CS100", "151394898", 5);
         int expResult = 0;
         int result = instance.compareTo(other);
