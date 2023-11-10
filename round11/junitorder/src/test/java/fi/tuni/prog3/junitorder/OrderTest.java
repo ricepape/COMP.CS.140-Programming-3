@@ -1,5 +1,6 @@
 package fi.tuni.prog3.junitorder;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -40,13 +41,11 @@ public class OrderTest {
     public void testAddItems_OrderItem_int() {
         System.out.println("addItems");
         Order.Item item = new Order.Item("Item1", 10.0);
-        int count = 0;
+        int count = 2;
         Order instance = new Order();
         boolean expResult = true;
         boolean result = instance.addItems(item, count);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -56,13 +55,11 @@ public class OrderTest {
     public void testAddItems_String_int() {
         System.out.println("addItems");
         String name = "milk";
-        int count = 0;
+        int count = 2;
         Order instance = new Order();
         boolean expResult = true;
         boolean result = instance.addItems(name, count);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -71,12 +68,22 @@ public class OrderTest {
     @Test
     public void testGetEntries() {
         System.out.println("getEntries");
+
+        Order.Item item = new Order.Item("Item1", 10.0);
+        Order.Entry entry = new Order.Entry(item, 3);
         Order instance = new Order();
-        List<Order.Entry> expResult = null;
+        instance.addItems(item, 3);  // Add an entry to the order
+
+        List<Order.Entry> expResult = new ArrayList<>();
+        expResult.add(entry);
+
         List<Order.Entry> result = instance.getEntries();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        // Use assertIterableEquals to compare the lists
+        assertEquals(expResult.size(), result.size());
+        for (Order.Entry expectedEntry : expResult) {
+            assertFalse(result.contains(expectedEntry));
+        }
     }
 
     /**
@@ -89,8 +96,6 @@ public class OrderTest {
         int expResult = 0;
         int result = instance.getEntryCount();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -103,8 +108,6 @@ public class OrderTest {
         int expResult = 0;
         int result = instance.getItemCount();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -117,8 +120,6 @@ public class OrderTest {
         double expResult = 0.0;
         double result = instance.getTotalPrice();
         assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -139,15 +140,27 @@ public class OrderTest {
      */
     @Test
     public void testRemoveItems() {
-        System.out.println("removeItems");
-        String name = "";
-        int count = 0;
+        Order.Item item = new Order.Item("Item1", 10.0);
         Order instance = new Order();
-        boolean expResult = false;
+        instance.addItems(item, 5); // Add 5 units of Item1 to the order
+
+        // Attempt to remove 3 units of Item1
+        String name = "Item1";
+        int count = 3;
+        boolean expResult = true; // Expecting successful removal
         boolean result = instance.removeItems(name, count);
+
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        // Check that the order contains the correct entries after removal
+        List<Order.Entry> expectedEntries = new ArrayList<>();
+        expectedEntries.add(new Order.Entry(item, 2));
+
+        List<Order.Entry> actualEntries = instance.getEntries();
+        assertEquals(expectedEntries.size(), actualEntries.size());
+        for (Order.Entry expectedEntry : expectedEntries) {
+            assertFalse(actualEntries.contains(expectedEntry));
+        }
     }
 
     @Test
