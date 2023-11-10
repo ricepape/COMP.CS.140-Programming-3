@@ -185,13 +185,20 @@ public class OrderTest {
     }
 
     @Test
-    public void testItemNotFoundException() {
-        Order order = new Order();
-        String itemName = "NonexistentItem";
+public void testOrderEntryConstructorAndGetters() {
+    // Create an item for the entry
+    Order.Item item = new Order.Item("Item1", 10.0);
 
-        assertTrue(order.isEmpty());
+    // Create an order entry
+    Order.Entry entry = new Order.Entry(item, 3);
 
-        assertThrows(NoSuchElementException.class, () -> order.removeItems(itemName, 2));
+    // Test the constructor
+    assertNotNull(entry);
+    assertEquals(item, entry.getItem());
+    assertEquals(3, entry.getCount());
+
+    // Test the getters
+    assertEquals(item, entry.getItem());
+    assertEquals(3, entry.getCount());
 }
-
 }
