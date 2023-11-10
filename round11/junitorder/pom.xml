@@ -29,6 +29,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>fi.tuni.prog3.junitorder.Junitorder</exec.mainClass>
+        <exec.mainClass>fi.tuni.prog3.junitorder.Order</exec.mainClass>
     </properties>
 </project>
