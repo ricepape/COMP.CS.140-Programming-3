@@ -185,20 +185,32 @@ public class OrderTest {
     }
 
     @Test
-public void testOrderEntryConstructorAndGetters() {
-    // Create an item for the entry
-    Order.Item item = new Order.Item("Item1", 10.0);
+    public void testOrderEntryConstructorAndGetters() {
+        // Create an item for the entry
+        Order.Item item = new Order.Item("Item1", 10.0);
 
-    // Create an order entry
-    Order.Entry entry = new Order.Entry(item, 3);
+        // Create an order entry
+        Order.Entry entry = new Order.Entry(item, 3);
 
-    // Test the constructor
-    assertNotNull(entry);
-    assertEquals(item, entry.getItem());
-    assertEquals(3, entry.getCount());
+        // Test the constructor
+        assertNotNull(entry);
+        assertEquals(item, entry.getItem());
+        assertEquals(3, entry.getCount());
 
-    // Test the getters
-    assertEquals(item, entry.getItem());
-    assertEquals(3, entry.getCount());
+        // Test the getters
+        assertEquals(item, entry.getItem());
+        assertEquals(3, entry.getCount());
+    }
+
+    @Test
+    public void testItemNotFoundExceptionWithMessage() {
+        String errorMessage = "Item not found in the order.";
+
+        // Create an instance of ItemNotFoundException with a specific message
+        Order.ItemNotFoundException exception = new Order.ItemNotFoundException(errorMessage);
+
+        // Verify that the exception is not null and has the correct message
+        assertNotNull(exception);
+        assertEquals(errorMessage, exception.getMessage());
 }
 }

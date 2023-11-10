@@ -94,23 +94,23 @@ public class Order {
             throw new IllegalArgumentException("Item unit count must be positive");
         }
 
-        Item item = new Item(name, 0.0); // You may need to provide a unit price here
+        Item item = new Item(name, 0.0);
         Entry entry = new Entry(item, count);
         entries.add(entry);
         return true;
     }
 
     // Method to get order entries
-    public List<Entry> getEntries() {
-        // Returns the order entries in their original adding order.
-        // Note: The returned list should be a copy to avoid modifying the internal state.
+    public List<Entry> getEntries() throws EmptyOrderException {
+            if (entries.isEmpty()) {
+                throw new EmptyOrderException("Invalid: Order is empty");
+            }
         return new ArrayList<>(entries);
     }
 
     // Method to get the total number of item entries in the order
     public int getEntryCount() {
-        // Returns the total number of item entries in this order.
-        // Note: Implement the logic based on the provided documentation.
+
         return entries.size();
     }
 
@@ -164,5 +164,16 @@ public class Order {
             }
         }
         return false;
+    }
+    
+    public static class EmptyOrderException extends RuntimeException {
+        public EmptyOrderException(String message) {
+            super(message);
+        }
+    }
+    public static class ItemNotFoundException extends RuntimeException {
+        public ItemNotFoundException(String message) {
+            super(message);
+        }
     }
 }
