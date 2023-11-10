@@ -19,22 +19,6 @@ public class AttainmentTest {
     
     public AttainmentTest() {
     }
-
-    @org.junit.jupiter.api.BeforeAll
-    public static void setUpClass() throws Exception {
-    }
-
-    @org.junit.jupiter.api.AfterAll
-    public static void tearDownClass() throws Exception {
-    }
-
-    @org.junit.jupiter.api.BeforeEach
-    public void setUp() throws Exception {
-    }
-
-    @org.junit.jupiter.api.AfterEach
-    public void tearDown() throws Exception {
-    }
     
     @BeforeAll
     public static void setUpClass() {
@@ -72,7 +56,7 @@ public class AttainmentTest {
     @org.junit.jupiter.api.Test
     public void testGetStudentNumber() {
         System.out.println("getStudentNumber");
-        Attainment instance = null;
+        Attainment instance = new Attainment("CS100", "151394898", 5);
         String expResult = "";
         String result = instance.getStudentNumber();
         assertEquals(expResult, result);
@@ -100,7 +84,7 @@ public class AttainmentTest {
     @org.junit.jupiter.api.Test
     public void testToString() {
         System.out.println("toString");
-        Attainment instance = null;
+        Attainment instance = new Attainment("CS100", "151394898", 5);
         String expResult = "";
         String result = instance.toString();
         assertEquals(expResult, result);
@@ -114,8 +98,8 @@ public class AttainmentTest {
     @org.junit.jupiter.api.Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        Attainment other = null;
-        Attainment instance = null;
+        Attainment other = new Attainment("CS100", "151324898", 4);
+        Attainment instance = new Attainment("CS100", "151394898", 5);
         int expResult = 0;
         int result = instance.compareTo(other);
         assertEquals(expResult, result);
