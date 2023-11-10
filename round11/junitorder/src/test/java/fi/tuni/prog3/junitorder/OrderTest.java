@@ -2,6 +2,8 @@ package fi.tuni.prog3.junitorder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -179,7 +181,6 @@ public class OrderTest {
         int count = 3;
 
         assertTrue(order.isEmpty());
-
-        assertThrows(IllegalArgumentException.class, () -> order.removeItems(name, count));
+        assertThrows(NoSuchElementException.class, () -> order.removeItems(name, count));
     }
 }

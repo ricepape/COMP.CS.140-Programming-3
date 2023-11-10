@@ -150,7 +150,7 @@ public class Order {
             throw new IllegalArgumentException("Item unit count must be positive");
         }
         if (entries.isEmpty()) {
-            throw new IllegalArgumentException("Item not found");
+            throw new NoSuchElementException("Item not found");
         }
 
         for (Entry entry : entries) {
