@@ -76,9 +76,6 @@ public class Order {
 
     // Method to add items to the order based on Order.Item
     public boolean addItems(Item item, int count) throws IllegalArgumentException {
-        // Adds count units of an item to the order.
-        // Note: Implement the logic based on the provided documentation.
-        // If needed, handle IllegalArgumentException.
         if (count <= 0) {
             throw new IllegalArgumentException("Item unit count must be positive");
         }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
- */
 package fi.tuni.prog3.junitorder;
 
 import java.util.List;
@@ -16,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @author vudinhthi2304
  */
-public class OrderIT {
+public class OrderTest {
     
-    public OrderIT() {
+    public OrderTest() {
     }
 
     
