@@ -9,6 +9,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import fi.tuni.prog3.junitorder.Order.ItemNotFoundException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -207,10 +210,11 @@ public class OrderTest {
         String errorMessage = "Item not found in the order.";
 
         // Create an instance of ItemNotFoundException with a specific message
-        Order.ItemNotFoundException exception = new Order.ItemNotFoundException(errorMessage);
+        ItemNotFoundException exception = new ItemNotFoundException(errorMessage);
 
         // Verify that the exception is not null and has the correct message
         assertNotNull(exception);
         assertEquals(errorMessage, exception.getMessage());
 }
+
 }
