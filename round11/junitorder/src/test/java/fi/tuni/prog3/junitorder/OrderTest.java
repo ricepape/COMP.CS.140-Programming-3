@@ -212,5 +212,12 @@ public class OrderTest {
         int invalidCount = -1;
         assertThrows(IllegalArgumentException.class, () -> new Order.Entry(item, invalidCount));
     }
+
+    @Test
+    public void testInvalidOrderItemConstructor() {
+        assertThrows(IllegalArgumentException.class, () -> new Order.Item("Item1", -10.0));
+    }
+
+
 }
 
