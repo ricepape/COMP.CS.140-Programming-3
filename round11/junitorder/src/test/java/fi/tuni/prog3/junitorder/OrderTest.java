@@ -183,4 +183,15 @@ public class OrderTest {
         assertTrue(order.isEmpty());
         assertThrows(NoSuchElementException.class, () -> order.removeItems(name, count));
     }
+
+    @Test
+    public void testItemNotFoundException() {
+        Order order = new Order();
+        String itemName = "NonexistentItem";
+
+        assertTrue(order.isEmpty());
+
+        assertThrows(NoSuchElementException.class, () -> order.removeItems(itemName, 2));
+}
+
 }
