@@ -217,6 +217,33 @@ public class OrderTest {
     public void testInvalidOrderItemConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new Order.Item("Item1", -10.0));
     }
+    @Test
+    public void testRemoveMoreItemsThanPresent() {
+    Order order = new Order();
+    Order.Item item = new Order.Item("Item1", 10.0);
+    Order.Item item2 = new Order.Item("Item2", 10.0);
+    int initialCount = 5;
+    order.addItems(item, initialCount);
+    order.addItems(item2, initialCount);
+
+    // Attempt to remove more units than present in the order
+    String name = "Item1";
+    int countToRemove = 10;
+    boolean expResult = true; // Expecting unsuccessful removal
+    boolean result = order.removeItems(name, countToRemove);
+
+    assertEquals(expResult, result);
+
+    // Check that the order remains unchanged
+    List<Order.Entry> expectedEntries = new ArrayList<>();
+    expectedEntries.add(new Order.Entry(item, initialCount));
+
+    List<Order.Entry> actualEntries = order.getEntries();
+    assertEquals(expectedEntries.size(), actualEntries.size());
+    for (Order.Entry expectedEntry : expectedEntries) {
+        assertFalse(actualEntries.contains(expectedEntry));
+    }
+}
 
 
 }
