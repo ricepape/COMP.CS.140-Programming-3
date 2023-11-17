@@ -23,8 +23,8 @@
         </rowConstraints>
          <children>
             <Label id="labelOp1" fx:id="labelOp1" alignment="TOP_LEFT" prefHeight="22.0" prefWidth="78.0" text="First operand:" />
-            <TextField id="FirstOperandTextField" fx:id="fieldOp1" GridPane.columnIndex="1" />
-            <TextField id="SecondOperandTextField" fx:id="fieldOp2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField id="fieldOp1" fx:id="fieldOp1" GridPane.columnIndex="1" />
+            <TextField id="fieldOp2" fx:id="fieldOp2" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="labelOp2" text="Second operand:" GridPane.rowIndex="1" />
             <GridPane prefHeight="30.0" prefWidth="106.0" GridPane.rowIndex="2">
               <columnConstraints>
