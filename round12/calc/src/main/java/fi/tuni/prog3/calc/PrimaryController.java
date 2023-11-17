@@ -38,30 +38,58 @@ public class PrimaryController {
     
     @FXML
     private void Addition() {
-        double result = Double.parseDouble(fieldOp1.getText())+
-                Double.parseDouble(fieldOp2.getText());
+        try {
+        double result = Double.parseDouble(fieldOp1.getText()) +
+                        Double.parseDouble(fieldOp2.getText());
         fieldRes.setText(Double.toString(result));
+        labelRes.setText("Addition performed successfully");
+    } catch (NumberFormatException e) {
+        labelRes.setText("Invalid input. Please enter valid numbers.");
+    } catch (ArithmeticException e) {
+        labelRes.setText("Error: Division by zero.");
+    }
     }
     
     @FXML
     private void Subtraction() {
-        double result = - Double.parseDouble(fieldOp2.getText())+
-                Double.parseDouble(fieldOp1.getText());
+        try {
+        double result = Double.parseDouble(fieldOp1.getText()) -
+                        Double.parseDouble(fieldOp2.getText());
         fieldRes.setText(Double.toString(result));
+        labelRes.setText("Addition performed successfully");
+    } catch (NumberFormatException e) {
+        labelRes.setText("Invalid input. Please enter valid numbers.");
+    } catch (ArithmeticException e) {
+        labelRes.setText("Error: Division by zero.");
+    }
     }
     
     @FXML
     private void Multiplication() {
-        double result = Double.parseDouble(fieldOp2.getText())*
-                Double.parseDouble(fieldOp1.getText());
+        try {
+        double result = Double.parseDouble(fieldOp1.getText()) *
+                        Double.parseDouble(fieldOp2.getText());
         fieldRes.setText(Double.toString(result));
+        labelRes.setText("Addition performed successfully");
+    } catch (NumberFormatException e) {
+        labelRes.setText("Invalid input. Please enter valid numbers.");
+    } catch (ArithmeticException e) {
+        labelRes.setText("Error: Division by zero.");
+    }
     }
     
     @FXML
     private void Division() {
-        double result = Double.parseDouble(fieldOp1.getText())/
-                Double.parseDouble(fieldOp2.getText());
+        try {
+        double result = Double.parseDouble(fieldOp1.getText()) /
+                        Double.parseDouble(fieldOp2.getText());
         fieldRes.setText(Double.toString(result));
+        labelRes.setText("Addition performed successfully");
+    } catch (NumberFormatException e) {
+        labelRes.setText("Invalid input. Please enter valid numbers.");
+    } catch (ArithmeticException e) {
+        labelRes.setText("Error: Division by zero.");
+    }
     }
        
 }

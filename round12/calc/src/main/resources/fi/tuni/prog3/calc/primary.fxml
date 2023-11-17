@@ -37,8 +37,8 @@
                 <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnAdd" onAction="#Addition" text="Add" GridPane.rowIndex="2" />
-                  <Button fx:id="btnSub" mnemonicParsing="false" onAction="#Subtraction" text="Subtract" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="btnAdd" onAction="#Addition" onKeyPressed="#Addition" onMouseClicked="#Addition" onMousePressed="#Addition" onTouchPressed="#Addition" onTouchReleased="#Addition" text="Add" GridPane.rowIndex="2" />
+                  <Button fx:id="btnSub" mnemonicParsing="false" onAction="#Subtraction" onKeyPressed="#Subtraction" onMouseClicked="#Subtraction" onMousePressed="#Subtraction" onTouchPressed="#Subtraction" onTouchReleased="#Subtraction" text="Subtract" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -52,8 +52,8 @@
                 <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnMul" mnemonicParsing="false" onAction="#Multiplication" text="Multiply" GridPane.rowIndex="2" />
-                  <Button fx:id="btnDiv" mnemonicParsing="false" onAction="#Division" text="Divide" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button fx:id="btnMul" mnemonicParsing="false" onAction="#Multiplication" onKeyPressed="#Multiplication" onMouseClicked="#Multiplication" onMousePressed="#Multiplication" onTouchPressed="#Multiplication" text="Multiply" GridPane.rowIndex="2" />
+                  <Button fx:id="btnDiv" mnemonicParsing="false" onAction="#Division" onMouseClicked="#Division" onMousePressed="#Division" onTouchPressed="#Division" text="Divide" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
