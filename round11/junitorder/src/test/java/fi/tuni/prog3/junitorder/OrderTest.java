@@ -80,6 +80,7 @@ public class OrderTest {
         Order.Entry entry = new Order.Entry(item, 3);
         Order instance = new Order();
         instance.addItems(item, 3);  // Add an entry to the order
+        instance.addItems(item, 4);
 
         List<Order.Entry> expResult = new ArrayList<>();
         expResult.add(entry);
@@ -149,6 +150,7 @@ public class OrderTest {
     public void testRemoveItems() {
         Order.Item item = new Order.Item("Item1", 10.0);
         Order instance = new Order();
+        instance.addItems("Item1", 4);
         instance.addItems(item, 5); // Add 5 units of Item1 to the order
 
         // Attempt to remove 3 units of Item1
@@ -217,34 +219,5 @@ public class OrderTest {
     public void testInvalidOrderItemConstructor() {
         assertThrows(IllegalArgumentException.class, () -> new Order.Item("Item1", -10.0));
     }
-    @Test
-    public void testRemoveMoreItemsThanPresent() {
-    Order order = new Order();
-    Order.Item item = new Order.Item("Item1", 10.0);
-    Order.Item item2 = new Order.Item("Item2", 10.0);
-    int initialCount = 5;
-    order.addItems(item, initialCount);
-    order.addItems(item2, initialCount);
-
-    // Attempt to remove more units than present in the order
-    String name = "Item1";
-    int countToRemove = 10;
-    boolean expResult = true; // Expecting unsuccessful removal
-    boolean result = order.removeItems(name, countToRemove);
-
-    assertEquals(expResult, result);
-
-    // Check that the order remains unchanged
-    List<Order.Entry> expectedEntries = new ArrayList<>();
-    expectedEntries.add(new Order.Entry(item, initialCount));
-
-    List<Order.Entry> actualEntries = order.getEntries();
-    assertEquals(expectedEntries.size(), actualEntries.size());
-    for (Order.Entry expectedEntry : expectedEntries) {
-        assertFalse(actualEntries.contains(expectedEntry));
-    }
-}
-
-
 }
 

@@ -30,6 +30,10 @@ public class Order {
             count -= des_count;
         }
 
+        public void addUnits(int des_count) {
+            count += des_count;
+        }
+
         // Method to create a string representation of the entry
         @Override
         public String toString() {
@@ -79,11 +83,21 @@ public class Order {
         if (count <= 0) {
             throw new IllegalArgumentException("Item unit count must be positive");
         }
-
-        Entry entry = new Entry(item, count);
-        entries.add(entry);
-        return true;
+        if (entries.stream().anyMatch(entry -> entry.getItem().equals(item))) {
+            // If the item is already in the order, find the entry and update the count
+            for (Entry entry : entries) {
+                if (entry.getItem().equals(item)) {
+                    entry.addUnits(count);
+                    return true;
+                }
+            }
+        }
+        else {
+            throw new NoSuchElementException("Item not found in any existing entry");
+        }
+        return false;
     }
+    
 
     // Method to add items to the order based on item name
     public boolean addItems(String name, int count) throws IllegalArgumentException, NoSuchElementException {
